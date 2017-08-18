@@ -4,8 +4,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
 	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-	<link rel="stylesheet" type="text/css" href="aui.css" />
+	<link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
 	<title>服务信息</title>
+	<script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.1.min.js"></script> 
+	<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
+
+	
 </head>
 <body>
 	
@@ -14,10 +18,27 @@
 	</div>
 	<footer class="aui-bar aui-bar-tab">
 	    
-	    	<div class="aui-btn aui-btn-info aui-bar-tab-item" tapmode>购买</div>
+	    	<div class="aui-btn aui-btn-info aui-bar-tab-item" tapmode id="buy">购买服务</div>
 	       
 	    
 	</footer>
 
 </body>
 </html>
+
+<script type="text/javascript">
+	$("#buy").click(function(e){
+		var dialog = new auiDialog({});
+		dialog.alert({
+			title:"购买确认",
+            msg:'确定购买该服务吗？',
+            buttons:['取消','确定']
+            },function(ret){
+            	if (ret.buttonIndex == 2) {
+					window.location.href ="./pay.html";
+            	}
+		});
+
+		
+	});
+</script>
