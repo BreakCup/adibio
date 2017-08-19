@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>修改自定义菜单</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
+	<script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.1.min.js"></script> 
+	<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
+	
+</head>
+<body>
+	<section class="aui-content-padded">
+		<div class="aui-content aui-margin-b-15">
+			<ul class="aui-list aui-from-list" action="">
+				<li class="aui-list-header">id信息</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">*appid:</div>
+						<div class = "aui-list-item-input">
+							<input type="text" placeholder="id" id="id" >
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">*appsecret:</div>
+						<div class = "aui-list-item-input">
+							<input type="text" placeholder="sercret" id="sercret">
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="aui-btn" type="sumbit" id="set">设置</div>
+				</li>
+			</ul>
+		</div>
+		<div class="aui-content aui-margin-b-15">
+			<ul class="aui-list aui-from-list">
+				<li class="aui-list-header">一级菜单信息</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">一:</div>
+						<div class = "aui-list-item-input">
+							<input type="text" placeholder="菜单一" >
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">二:</div>
+						<div class = "aui-list-item-input">
+							<input type="text" placeholder="菜单二" >
+						</div>
+					</div>
+				</li>	
+			</ul>
+		</div>
+		<div class="aui-content aui-margin-b-15">
+			
+			<label>acesstaken:</label>
+			<label id="taken">none</label>
+		</div>
+		
+	</section>
+</body>
+</html>
+<script type="text/javascript">
+		$('#set').click(function (argument) {
+			console.log("click");
+			if ($('#taken').text() == 'none') {
+				console.log("start get");
+				console.log(alert("qrding"));
+				$.ajax({
+					method:"GET",
+					url:"https://api.weixin.qq.com/cgi-bin/token",
+					data:{
+						grant_type:"client_credential",
+						appid:"wx68153614dd35793a",
+						secret:"92df28a28f2e5790cb0b597db6991cf7"
+					},
+					dataType:'JSON',
+					jsonpCallback:'callback',
+					success:function(data){
+						console.log(data);
+					}
+				});
+				/*$.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx68153614dd35793a&secret=92df28a28f2e5790cb0b597db6991cf7',function(data){
+					console.log(data);
+					$('#taken').text(data.access_token);
+
+				});*/
+			}
+		});
+	</script>

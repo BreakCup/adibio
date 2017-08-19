@@ -5,93 +5,164 @@
 	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
 	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
 	<link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
+	<script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.1.min.js"></script> 
+	<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
 	<title>服务购买</title>
 </head>
 <body>
 	
 	<section class="aui-content-padded">
-		<ul class="aui-list aui-from-list">
-			<li class="aui-list-header">填写信息（必填）</li>
-			<li class="aui-list-item">
-				<div class="aui-list-item-inner">
-					<div class="aui-list-item-label">*姓名:</div>
-					<div class = "aui-list-item-input">
-						<input type="text" placeholder="姓名" >
+	<form name="inform">
+		
+		<div class="aui-content aui-margin-b-15">
+			<ul class="aui-list aui-from-list" >
+				<li class="aui-list-header">填写信息（必填）</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">*姓名:</div>
+						<div class = "aui-list-item-input">
+							<input type="text" placeholder="姓名" name="name">
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="aui-list-item">
-				<div class="aui-list-item-inner">
-					<div class="aui-list-item-label">*性别:</div>
-					<div class = "aui-list-item-input">
-						<input type="text" placeholder="性别" >
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">*性别:</div>
+						<div class = "aui-list-item-input">
+							<input type="text" placeholder="男/女" name="sex">
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="aui-list-item">
-				<div class="aui-list-item-inner">
-					<div class="aui-list-item-label">*年龄:</div>
-					<div class = "aui-list-item-input">
-						<input type="number" placeholder="年龄" >
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">*年龄:</div>
+						<div class = "aui-list-item-input">
+							<input type="number" placeholder="年龄" name="age">
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="aui-list-item">
-				<div class="aui-list-item-inner">
-					<div class="aui-list-item-label">*邮寄地址:</div>
-					<div class = "aui-list-item-input">
-						<input type="text" placeholder="地址" >
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">*邮寄地址:</div>
+						<div class = "aui-list-item-input">
+							<input type="text" placeholder="地址" name="adr">
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="aui-list-item">
-				<div class="aui-list-item-inner">
-					<div class="aui-list-item-label">*联系电话:</div>
-					<div class = "aui-list-item-input">
-						<input type="number" placeholder="电话" >
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">*联系电话:</div>
+						<div class = "aui-list-item-input">
+							<input type="number" placeholder="电话" name="phone">
+						</div>
 					</div>
-				</div>
-			</li>
+				</li>
 
-			<li class="aui-list-item">
-				<div class="aui-list-item-inner">
-					<div class="aui-list-item-label">*是否怀孕:</div>
-					<div class = "aui-list-item-input">
-						<label><input class="aui-radio" type="radio" name="select" >是</label>
-						<label><input class="aui-radio" type="radio" name="select" checked>否</label>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">*是否怀孕:</div>
+						<div class = "aui-list-item-input">
+							<label><input class="aui-radio" type="radio" name="ispregnant" onclick="isPreClick(this)"></label>
+							
+						</div>
 					</div>
-				</div>
-			</li>
-
-			<li class="aui-list-header">其他信息（选题）</li>
-			<li class="aui-list-item">
-				<div class="aui-list-item-inner">
-					<div class="aui-list-item-label">身高:</div>
-					<div class = "aui-list-item-input">
-						<input type="text" placeholder="身高（cm）" >
+				</li>
+			</ul>
+		</div>
+		<div class="aui-content aui-margin-b-15">
+			<ul class="aui-list aui-from-list" >
+				<li class="aui-list-header">其他信息（选题）</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">身高:</div>
+						<div class = "aui-list-item-input">
+							<input type="number" placeholder="身高（cm）" name="tall">
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="aui-list-item">
-				<div class="aui-list-item-inner">
-					<div class="aui-list-item-label">体重:</div>
-					<div class = "aui-list-item-input">
-						<input type="text" placeholder="体重（kg）" >
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">体重:</div>
+						<div class = "aui-list-item-input">
+							<input type="number" placeholder="体重（kg）" name="weight">
+						</div>
 					</div>
-				</div>
-			</li>
-			
-			
-		</ul>
+				</li>	
+			</ul>
+		</div>
+		<p class=""><input class="aui-checkbox" type="radio" name="isagree" onclick="agreeClick(this)">本项目仅用于XX病早期筛查，所测结果并不代表最终确诊结果。</p>
+	</form>
 	</section>
 
 	
 	<footer class="aui-bar aui-bar-tab">
 	    
-	    	<div class="aui-btn aui-btn-success aui-bar-tab-item" tapmode>支付</div>
+	    	<div class="aui-btn aui-btn-success aui-bar-tab-item" id="pay" tapmode>支付</div>
 	       
 	    
 	</footer>
 
 </body>
 </html>
+<script type="text/javascript">
+
+	$(document).ready(function(e){
+		
+	})
+	$('#pay').click(function(e){
+		var dialog = new auiDialog({});
+		var arr = $('form').serializeArray();
+		var phone = /^[1][3,5,8][0-9]{9}$/;
+		console.log(arr);
+		var data = {};
+		for(var item in arr){
+			data[arr[item].name] = arr[item].value;
+		}
+		console.log(data);
+		if ((!data.isagree) || data.age==" " || data.name==" " || data.sex==" " ||data.adr==" " || data.phone==" "|| data.age=="" || data.name=="" || data.sex=="" ||data.adr=="" || data.phone=="" ) {
+			
+			dialog.alert({
+				title:"提示",
+	            msg:'必填信息不能为空',
+	            buttons:['确定']
+	            }
+			);
+		}else if(!data.ispregnant ){
+			dialog.alert({
+				title:"提示",
+	            msg:'请勾选注意项',
+	            buttons:['确定']
+	            }
+			);
+		}else if (!phone.test(data.phone) ) {
+			dialog.alert({
+				title:"提示",
+	            msg:'请填写正确的电话号码',
+	            buttons:['确定']
+	            }
+			);
+		}else{
+			dialog.alert({
+				title:"提示",
+	            msg:'确定信息无误并且支付？',
+	            buttons:['取消','确定'],
+	            },function(re){
+	            	if (re.buttonIndex==2) {
+	            		console.log("pay");
+	            		//打开微信支付链接
+	        }});
+		}
+
+	});
+	var pflag = true;
+	function isPreClick(id){
+		id.checked = pflag;
+		pflag = !pflag;
+	}
+	var aflag = true;
+	function agreeClick(id){
+		id.checked =aflag;
+		aflag = !aflag;
+	}
+</script>
+
