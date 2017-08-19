@@ -127,6 +127,8 @@
 	            buttons:['确定']
 	            }
 			);
+		}else if(!data.ispregnant){
+			data.ispregnant = "off";
 		}else if(!data.isagree ){
 			dialog.alert({
 				title:"提示",
