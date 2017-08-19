@@ -5,13 +5,33 @@
 	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
 	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
 	<link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
+	<link rel="stylesheet" type="text/css" href="./AUI/css/aui-pull-refresh.css" />
 	<script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.1.min.js"></script> 
 	<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
+	<script type="text/javascript" src="./AUI/script/aui-pull-refresh.js" ></script>
+
 	<title></title>
+	<script type="text/javascript">
+		    var pullRefresh = new auiPullToRefresh({
+		    	container: document.querySelector('.aui-refresh-content'),
+		        callback: loadingCallback,
+		        triggerDistance: 100
+		    })
+		    function loadingCallback(state){
+		        if(state == 'success'){
+		            setTimeout(function(){
+		            	console.log("reflesh");
+		                pullRefresh.cancelLoading();//刷新成功后调用此方法隐藏
+		            },1500)
+		        }
+		    }
+
+	</script>
 </head>
 <body>
-	<header class="aui-bar aui-bar-nav">我的订单</header>
-	<section class="aui-content-padded">
+	
+	<section class="aui-content-padded aui-refresh-content" id="ref">
+		<header class="aui-bar aui-bar-nav">我的订单</header>
 	    <div class="aui-card-list" >
 	        <div class="aui-card-list-header">
 	            订单详情

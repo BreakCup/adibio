@@ -67,30 +67,52 @@
 </body>
 </html>
 <script type="text/javascript">
+		var xmlhttp;
+		if (window.XMLHttpRequest)
+		{
+		    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+		    xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{
+		    // IE6, IE5 浏览器执行代码
+		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
 		$('#set').click(function (argument) {
 			console.log("click");
-			if ($('#taken').text() == 'none') {
+			
+			xmlhttp.open("GET","https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx68153614dd35793a&secret=92df28a28f2e5790cb0b597db6991cf7",true);
+			xmlhttp.send();
+			console.log(xmlhttp.responseText);
+			xmlhttp.onreadystatechange=function()
+			  {
+			    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+			      console.log(xmlhttp.responseText);
+			    }
+			  }
+			/*if ($('#taken').text() == 'none') {
 				console.log("start get");
-				console.log(alert("qrding"));
+				
 				$.ajax({
 					method:"GET",
 					url:"https://api.weixin.qq.com/cgi-bin/token",
-					data:{
+					data:callback({
 						grant_type:"client_credential",
 						appid:"wx68153614dd35793a",
 						secret:"92df28a28f2e5790cb0b597db6991cf7"
-					},
+					});,
 					dataType:'JSON',
 					jsonpCallback:'callback',
 					success:function(data){
 						console.log(data);
 					}
-				});
+				});*/
 				/*$.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx68153614dd35793a&secret=92df28a28f2e5790cb0b597db6991cf7',function(data){
 					console.log(data);
 					$('#taken').text(data.access_token);
 
-				});*/
-			}
+				});
+			}*/
 		});
 	</script>
