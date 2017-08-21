@@ -447,6 +447,7 @@ img.aui-img-round {
 }
 .aui-content-padded {
   	margin: 0.75rem;
+  	margin-bottom: 2.7rem;
   	position: relative;
   	word-break: break-all;
   	-webkit-overflow-scrolling: touch;

@@ -29,10 +29,8 @@
 					<div class="aui-list-item-inner">
 						<div class="aui-list-item-label">*性别:</div>
 						<div class = "aui-list-item-input">
-							<select name="sex">
-								<option>男</option>
-								<option>女</option>
-							</select>
+							<label><input class="aui-radio" type="radio" name="sex"  value="男" checked="true">男</label>
+							<label><input class="aui-radio" type="radio" name="sex"  value="女">女</label>
 							<!--<input type="text" placeholder="男/女" name="sex">-->
 						</div>
 					</div>
@@ -72,7 +70,8 @@
 					<div class="aui-list-item-inner">
 						<div class="aui-list-item-label">*是否怀孕:</div>
 						<div class = "aui-list-item-input">
-							<label><input class="aui-radio" type="radio" name="ispregnant" onclick="isPreClick(this)"></label>
+							<label><input class="aui-radio" type="radio" name="ispregnant" value="是">是</label>
+							<label><input class="aui-radio" type="radio" name="ispregnant" value="否" checked="true">否</label>
 							
 						</div>
 					</div>
@@ -129,20 +128,17 @@
 			data[arr[item].name] = arr[item].value;
 		}
 		console.log(data);
-		if ((!data.isagree) || data.age==" " || data.name==" " || data.sex==" " ||data.adr==" " || data.phone==" "|| data.age=="" || data.name=="" || data.sex=="" ||data.adr=="" || data.phone=="" ) {
-			
+		if (data.age==" " || data.name==" " || data.phone==" "|| data.age=="" || data.name=="" ||  data.phone=="") {
 			dialog.alert({
 				title:"提示",
 	            msg:'必填信息不能为空',
 	            buttons:['确定']
 	            }
 			);
-		}else if(!data.ispregnant){
-			data.ispregnant = "off";
-		}else if(!data.isagree ){
-			dialog.alert({
+		}else if(data.adr==" " || data.adr=="" || data.city=="请选择"){
+				dialog.alert({
 				title:"提示",
-	            msg:'请勾选注意项',
+	            msg:'请填写正确的地址。',
 	            buttons:['确定']
 	            }
 			);
@@ -150,6 +146,13 @@
 			dialog.alert({
 				title:"提示",
 	            msg:'请填写正确的电话号码',
+	            buttons:['确定']
+	            }
+			);
+		}else if(!data.isagree ){
+			dialog.alert({
+				title:"提示",
+	            msg:'请勾选注意项',
 	            buttons:['确定']
 	            }
 			);
@@ -166,11 +169,7 @@
 		}
 
 	});
-	var pflag = true;
-	function isPreClick(id){
-		id.checked = pflag;
-		pflag = !pflag;
-	}
+
 	var aflag = true;
 	function agreeClick(id){
 		id.checked =aflag;
