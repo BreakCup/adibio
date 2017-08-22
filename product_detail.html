@@ -8,7 +8,23 @@
 	<title>服务信息</title>
 	<script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.1.min.js"></script> 
 	<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
+	
+	<script type="text/javascript">
+	$("#buy").click(function(e){
+		var dialog = new auiDialog({});
+		dialog.alert({
+			title:"购买确认",
+            msg:'确定购买该服务吗？',
+            buttons:['取消','确定']
+            },function(ret){
+            	if (ret.buttonIndex == 2) {
+					window.location.href ="./pay_detail.html";
+            	}
+		});
 
+		
+	});
+</script>
 	
 </head>
 <body>
@@ -41,19 +57,3 @@
 </body>
 </html>
 
-<script type="text/javascript">
-	$("#buy").click(function(e){
-		var dialog = new auiDialog({});
-		dialog.alert({
-			title:"购买确认",
-            msg:'确定购买该服务吗？',
-            buttons:['取消','确定']
-            },function(ret){
-            	if (ret.buttonIndex == 2) {
-					window.location.href ="./pay.html";
-            	}
-		});
-
-		
-	});
-</script>
