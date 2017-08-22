@@ -6,7 +6,7 @@
 	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
 	<link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
 	<link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-	<link href="https://cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css" rel="stylesheet">
+	<link href="./jquery-weui/css/jquery-weui.min.css" rel="stylesheet">
 	
 	<title>服务购买</title>
 	
@@ -133,13 +133,13 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
 
-<script src="https://cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
+<script src="./jquery-weui/js/jquery-weui.min.js"></script>
+<script src="./jquery-weui/js/city-picker.min.js"></script>
 <script type="text/javascript">
 	
 	//呼出省市选择器
 	$("#city-picker").cityPicker({
-	  showDistrict: false
+	  showDistrict: true
 	});
 	
       
@@ -149,6 +149,8 @@
 		console.log("change");
 		//阻止input-age内输入e
 		$('input[name=age]').val($('input[name=age]').val().replace(/^[e.]$/,''));
+
+		$('input[name=phone]').val($('input[name=phone]').val().replace(/^[e.]$/,''));
 		//遍历form的元素值
 		var arr = $('form').serializeArray();
 		var data = {};
