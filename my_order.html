@@ -9,45 +9,103 @@
 	<script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.1.min.js"></script> 
 	<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
 	<script type="text/javascript" src="./AUI/script/aui-pull-refresh.js" ></script>
-
-	<title></title>
-	<script type="text/javascript">
-		    var pullRefresh = new auiPullToRefresh({
-		    	container: document.querySelector('.aui-refresh-content'),
-		        callback: loadingCallback,
-		        triggerDistance: 100
-		    })
-		    function loadingCallback(state){
-		        if(state == 'success'){
-		            setTimeout(function(){
-		            	console.log("reflesh");
-		                pullRefresh.cancelLoading();//刷新成功后调用此方法隐藏
-		            },1500)
-		        }
-		    }
-
-	</script>
+	<script data-th-src="@{/jquery-weui/js/jquery-weui.min.js}"></script>
+	<script type="text/javascript" src="./AUI/script/aui-tab.js"></script>
+	<title>我的订单</title>
+	
 </head>
-<body>
-	<header class="aui-bar aui-bar-nav">我的订单</header>
-	<section class="aui-content-padded aui-refresh-content" id="ref">
-	    <div class="aui-card-list" >
-	        <div class="aui-card-list-header">
-	            订单详情
-	        </div>
-	        <div class="aui-card-list-content-padded">
-	            <div class="aui-row aui-row-padded">
-	            	<div class="aui-col-xs-8">订单编号:123456123456</div>
-	            	<div class="aui-col-xs-4">
-	            		<div>日期:2014/11/12</div>
-	            		<div>金额:￥50</div>
-	            	</div>
-	            </div>
-	        </div>
-	        <div class="aui-card-list-footer">
-	            订单状况：已完成
-	        </div>
-	    </div>
+	<header class="aui-bar aui-bar-nav" id="navbar">
+		<div class="aui-tab" id="tab">
+		    <div class="aui-tab-item aui-active">已完成</div>
+		    <div class="aui-tab-item">处理中</div>
+		</div>
+	</header>
+	<section class="aui-content-padded aui-refresh-content">
+		<div id="done">
+			<div class="aui-card-list" >
+		        <div class="aui-card-list-header">
+		            订单详情
+		        </div>
+		        <div class="aui-card-list-content-padded">
+		            <div class="aui-row aui-row-padded">
+		            	<div class="aui-col-xs-8">订单编号:123456123456</div>
+		            	<div class="aui-col-xs-4">
+		            		<div>日期:2014/11/12</div>
+		            		<div>金额:￥50</div>
+		            	</div>
+		            </div>
+		        </div>
+		        <div class="aui-card-list-footer">
+		            订单状况：已完成
+		        </div>
+		    </div>
+		</div>
+		<div style="display: none" id="handing">
+			<div class="aui-card-list" >
+		        <div class="aui-card-list-header">
+		            订单详情
+		        </div>
+		        <div class="aui-card-list-content-padded">
+		            <div class="aui-row aui-row-padded">
+		            	<div class="aui-col-xs-8">订单编号:123456123456</div>
+		            	<div class="aui-col-xs-4">
+		            		<div>日期:2014/11/12</div>
+		            		<div>金额:￥50</div>
+		            	</div>
+		            </div>
+		        </div>
+		        <div class="aui-card-list-footer">
+		            订单状况：处理中
+		        </div>
+		    </div>
+		</div>
+	   
+	</section>
+		 
 	</section>
 </body>
+
+<script type="text/javascript">
+
+	//tab切换
+	var tabIndex=1;
+	var tab = new auiTab({
+        element:document.getElementById("tab"),
+        index:1,
+        repeatClick:false
+    },function(ret){
+    	tabIndex=ret.index;
+        if (ret.index==1) {
+			//已完成
+			document.getElementById('done').style.display="block";
+			document.getElementById('handing').style.display="none";
+
+        }else{
+        	//处理中
+        	document.getElementById('done').style.display="none";
+			document.getElementById('handing').style.display="block";
+        }
+    });
+
+	//已完成-下拉刷新类
+	var pullRefresh = new auiPullToRefresh({
+	    container: document.querySelector('.aui-refresh-content'),//下拉容器
+	    textDown:"刷新",
+	    triggerDistance: 100 //下拉高度
+	},function(ret){
+	    if(ret.status=="success"){
+	           //请求服务器数据
+	           if (tabIndex==1) {
+	           	//获取已完成的订单数据
+	           }else{
+	           	//获取处理中的订单数据
+	           }
+	           pullRefresh.cancelLoading();//刷新成功后调用此方法隐藏
+	        }
+	    
+	})
+	//处理中-下来刷新类
+	
+
+</script>
 </html>
