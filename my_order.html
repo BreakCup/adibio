@@ -6,7 +6,7 @@
 	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
 	<link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
 	<link rel="stylesheet" type="text/css" href="./AUI/css/aui-pull-refresh.css" />
-	<script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.1.min.js"></script> 
+	<script type = "text/javascript" src = "https://code.jquery.com/jquery-3.2.1.min.js"></script> 
 	<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
 	<script type="text/javascript" src="./AUI/script/aui-pull-refresh.js" ></script>
 	<script data-th-src="@{/jquery-weui/js/jquery-weui.min.js}"></script>
@@ -21,41 +21,42 @@
 		</div>
 	</header>
 	<section class="aui-content-padded aui-refresh-content">
-		<div id="done">
+		<div id="done" style="display: none">
 			<div class="aui-card-list" >
-		        <div class="aui-card-list-header">
-		            订单详情
-		        </div>
+		        <div class="aui-card-list-header">已完成</div>
 		        <div class="aui-card-list-content-padded">
 		            <div class="aui-row aui-row-padded">
 		            	<div class="aui-col-xs-8">订单编号:123456123456</div>
-		            	<div class="aui-col-xs-4">
-		            		<div>日期:2014/11/12</div>
+		            	<div class="aui-col-xs-4 aui-pull-right">
+		            		<div></div>
 		            		<div>金额:￥50</div>
 		            	</div>
 		            </div>
 		        </div>
 		        <div class="aui-card-list-footer">
-		            订单状况：已完成
+		            <div class=" aui-pull-left">下单时间：2017-08-24 15:30:10</div>
+		            <div class=" aui-pull-right">已完成</div>
 		        </div>
 		    </div>
 		</div>
-		<div style="display: none" id="handing">
+		<div id="handing" style="display: none">
 			<div class="aui-card-list" >
 		        <div class="aui-card-list-header">
-		            订单详情
+		            <div class=" aui-pull-left">待支付</div>
+		            <div class="aui-pull-right" id="timeShow">支付剩余时间：15:00</div>
 		        </div>
 		        <div class="aui-card-list-content-padded">
 		            <div class="aui-row aui-row-padded">
 		            	<div class="aui-col-xs-8">订单编号:123456123456</div>
 		            	<div class="aui-col-xs-4">
-		            		<div>日期:2014/11/12</div>
+		            		<div></div>
 		            		<div>金额:￥50</div>
 		            	</div>
 		            </div>
 		        </div>
 		        <div class="aui-card-list-footer">
-		            订单状况：处理中
+		        	<div class=" aui-pull-left">下单时间：2017-08-24 15:30:10</div>
+		            <div class="aui-btn aui-btn-success aui-pull-right" id="pay">支付</div>
 		        </div>
 		    </div>
 		</div>
@@ -66,12 +67,49 @@
 </body>
 
 <script type="text/javascript">
-
-	//tab切换
+	var time = 900;//十五分钟
 	var tabIndex=1;
-	var tab = new auiTab({
+
+	$(document).ready(function() { 
+		checkTab();
+		timer();
+	}); 
+
+	function timer(){
+		if (time == 0) {
+			$('#timeShow').html('已失效');
+			$('#pay').remove();
+
+			return 0;
+		}else{
+			time -= 1;
+			$('#timeShow').html('支付剩余时间：'+parseInt(time/60)+':'+((time%60<10?('0'):'')+time%60));
+			setTimeout('timer()',1000);
+		}
+	}
+
+	
+	function checkTab(tab){
+		//var tab = $.query.get('tab');
+		var tab="done";
+		if (tab=='handing') {
+			//处理中
+        	document.getElementById('done').style.display="none";
+			document.getElementById('handing').style.display="block";
+			tabIndex=2;
+		}else{
+			//已完成
+			console.log("done");
+			document.getElementById('done').style.display="block";
+			document.getElementById('handing').style.display="none";
+			tabIndex=1;
+		}
+	}
+	//tab切换
+	
+	var auiTab = new auiTab({
         element:document.getElementById("tab"),
-        index:1,
+        index:tabIndex,
         repeatClick:false
     },function(ret){
     	tabIndex=ret.index;
@@ -87,7 +125,7 @@
         }
     });
 
-	//已完成-下拉刷新类
+	//下拉刷新
 	var pullRefresh = new auiPullToRefresh({
 	    container: document.querySelector('.aui-refresh-content'),//下拉容器
 	    textDown:"刷新",
@@ -96,15 +134,17 @@
 	    if(ret.status=="success"){
 	           //请求服务器数据
 	           if (tabIndex==1) {
+	           	console.log("done");
 	           	//获取已完成的订单数据
 	           }else{
+	           	console.log("handing");
 	           	//获取处理中的订单数据
 	           }
 	           pullRefresh.cancelLoading();//刷新成功后调用此方法隐藏
 	        }
 	    
 	})
-	//处理中-下来刷新类
+	
 	
 
 </script>
