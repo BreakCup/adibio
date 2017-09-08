@@ -60,7 +60,7 @@
                             <label><input class="aui-radio" type="radio" name="gender" value="M"
                                           checked="true">男</label>
                             <label><input class="aui-radio" type="radio" name="gender" value="F">女</label>
-                            <!--<input type="text" placeholder="男/女" name="sex">-->
+                            
                         </div>
                     </div>
                 </li>
@@ -76,7 +76,7 @@
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-label">*邮寄地址:</div>
                         <div class="aui-list-item-input">
-                            <input type="text" name="local" class="weui-input" value="" id="city-picker">
+                            <input type="text" name="province" class="weui-input" value="" id="city-picker">
                         </div>
                     </div>
                 </li>
@@ -98,11 +98,22 @@
                 </li>
 
                 <li class="aui-list-item">
-                    <div class="aui-list-item-inner">
+                    <div class="aui-list-item-inner" style="display: none">
                         <div class="aui-list-item-label">*是否怀孕:</div>
                         <div class="aui-list-item-input">
-                            <label><input class="aui-radio" type="radio" name="pregnant" value="1">是</label>
-                            <label><input class="aui-radio" type="radio" name="pregnant" value="0"
+                            <label><input class="aui-radio" type="radio" name="is_pregnant" value="1">是</label>
+                            <label><input class="aui-radio" type="radio" name="is_pregnant" value="0"
+                                          checked="true">否</label>
+
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">*是否有糖尿病史:</div>
+                        <div class="aui-list-item-input">
+                            <label><input class="aui-radio" type="radio" name="has_diabetic" value="1">是</label>
+                            <label><input class="aui-radio" type="radio" name="has_diabetic" value="0"
                                           checked="true">否</label>
 
                         </div>
@@ -174,11 +185,24 @@
     var paypath = context + '/pay_event';
 
     function requestPayEvent() {
+
+        //遍历form的元素值
+        var arr = $('form').serializeArray();
+        var data = {};
+        //变成json格式
+        for (var item in arr) {
+            data[arr[item].name] = arr[item].value;
+        }
+        var local = data.province.split(' ');
+        data.province = local[0];
+        data.city = local[1];
+        data.district = local[2];
+
         $.ajax({
             cache: true,
             type: "POST",
             url: paypath,
-            data: $('#payinfo_form').serialize(),// 你的formid
+            data: $.param(data),// 你的formid
             async: false,
             error: function (request) {
                 alert("Connection error");
@@ -242,7 +266,7 @@
         for (var item in arr) {
             data[arr[item].name] = arr[item].value;
         }
-        if (data.name == '' || data.name == ' ' || data.age == '' || data.age == ' ' || data.local == "" || data.address == '' || data.address == ' ' || data.phone == '' || data.phone == ' ' || (!data.isagree)) {
+        if (data.name == '' || data.name == ' ' || data.age == '' || data.age == ' ' || data.province == "" || data.address == '' || data.address == ' ' || data.phone == '' || data.phone == ' ' || (!data.isagree)) {
             Mask('hide');
         } else {
             Mask('unhide');
