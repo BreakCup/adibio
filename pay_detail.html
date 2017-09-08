@@ -109,9 +109,9 @@
                     </div>
                 </li>
                 <li class="aui-list-item">
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-label">*是否有糖尿病史:</div>
-                        <div class="aui-list-item-input">
+                    <div class="" style="display: flex;flex-direction: row;">
+                        <div class="">*是否有糖尿病史:</div>
+                        <div class="" style="">
                             <label><input class="aui-radio" type="radio" name="has_diabetic" value="1">是</label>
                             <label><input class="aui-radio" type="radio" name="has_diabetic" value="0"
                                           checked="true">否</label>
@@ -146,7 +146,8 @@
         <input type="hidden" th:value="${product.product_id}" name="product_id">
         <p class="">
             <input class="aui-checkbox" type="radio" name="isagree" onclick="agreeClick(this)">
-            <span data-th-text="'本项目仅用于' + ${product.name} + '，所测结果并不代表最终确诊结果。'"></span>
+            <!--<span data-th-text="'本项目仅用于' + ${product.name} + '，所测结果并不代表最终确诊结果。'"></span>-->
+            <p>同意该<a href="#">协议</a>才能购买</p>
         </p>
     </form>
 </section>
