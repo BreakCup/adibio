@@ -6,39 +6,65 @@
           content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/> 
     <link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
     <link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    <link data-th-href="@{/jquery-weui/css/jquery-weui.min.css}" rel="stylesheet">
-	<script type = "text/javascript" src = "https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+    <link rel="stylesheet" href="./jquery-weui/css/jquery-weui.css">
+    <script type = "text/javascript" src = "./jquery-3.2.1/jquery-3.2.1.min.js"></script> 
+   <!-- <link data-th-href="@{/jquery-weui/css/jquery-weui.min.css}" rel="stylesheet"> -->
+
+
+	
 	<title>购物车</title>
 </head>
 <body>
-	<section class="aui-content-padded">
-		<div class="aui-card-list" >
+	<section class="aui-content-padded" id=border>
+
+		<script type="text/javascript">
+			
+			
+			
+
+
+		</script>
+
+<!--
+		<div class="aui-card-list aui-row aui-row-padded" >
+		<div class="aui-col-xs-2 aui-card-list-content-padded">
+			<input class="aui-checkbox aui-col-xs-4" type="checkbox" name="" checked>
+		</div>
+		<div class="aui-col-xs-10">
 		    <div class="aui-card-list-header">
-		    	<input class="aui-checkbox aui-col-xs-4" type="checkbox" name="" checked>
+		    	
 		    </div>
 		 	<div class="aui-card-list-content-padded">
 		 		<div class="aui-row aui-row-padded">
 		 			
 		            <div class="aui-col-xs-4">糖尿病检测服务</div>
 		            <div class="aui-col-xs-4 aui-pull-right">
-		            	<div class = "count-eare">
-			        		 <span class="input-number-decrement" onclick="countReduce(this)">–</span>
-			        		 <input class="input-number" type="number" value="1" oninput="">
-			        		 <span class="input-number-increment" onclick="countAdd(this)">+</span>
-			        	</div>
-		            	
+		            	<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:100px;float:right">
+		                    <div class="aui-bar-btn-item" id="decrement">
+		                        <i class="aui-iconfont aui-icon-minus"></i>
+		                    </div>
+		                    <div class="aui-bar-btn-item">
+		                        <input type="number" class="aui-input aui-text-center" value="1" >
+		                    </div>
+		                    <div class="aui-bar-btn-item" id="increment">
+		                        <i class="aui-iconfont aui-icon-plus"></i>
+		                    </div>
+		                </div>
+            	
 		            </div>
 		        </div>
 		    	
 		    </div>
 		    <div class="aui-card-list-footer">
 		    	
-		    	<div>金额:￥50</div>
-		        
+		    	<div class="aui-pull-left" >金额:￥50</div>
+
+		    	
 		    </div>
 		</div>
+		</div>
+-->
 
-		
 
 
 
@@ -48,6 +74,184 @@
 	    <div class="weui-btn weui-btn_primary aui-bar-tab-item"  onclick="Buy()" tapmode>购买</div>
 	</footer>
 </body>
+
+
+<!--
+<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
+
+<script data-th-src="@{/AUI/script/aui-dialog.js}" ></script>
+<script data-th-src="@{/jquery-weui/js/jquery-weui.min.js}"></script>
+-->
+
+<script type="text/javascript" src="./jquery-weui/js/jquery-weui.min.js" ></script>
+<script type="text/javascript">
+
+			var cartData={};
+			var unit_price=[];
+			
+			$(document).ready(GetInfo());
+			
+			function GetInfo(){
+				var html;
+				var path;
+				//获取购物车信息
+				/*$.ajax({
+		            cache: true,
+		            type: "GET",
+		            url: path,
+		            data: "get shopping car info",// 
+		            dataType:json,
+		            async: true,
+		            error: function (request) {
+		                
+		            },
+		            success: function (data) {
+		                cartData = data
+		            }
+		        });*/
+		        cartData = {
+		        	"result":"ok",
+		        	"errMsg":"",
+		        	"parm":[
+		        		{
+		        			"cart_id":"",
+		        			"cart_itemid":"1230",
+		        			"product_id":"32132146-4564-56465",
+		        			"product_name":"糖尿病早期筛查",
+		        			"unit_price":0.01,
+		        			"quantity":3
+
+		        		},{
+		        			"cart_id":"",
+		        			"cart_itemid":"1230",
+		        			"product_id":"32132146-4564-56465",
+		        			"product_name":"糖尿病早期筛查",
+		        			"unit_price":0.01,
+		        			"quantity":3
+
+		        		},{
+		        			"cart_id":"",
+		        			"cart_itemid":"1230",
+		        			"product_id":"32132146-4564-56465",
+		        			"product_name":"糖尿病早期筛查",
+		        			"unit_price":0.01,
+		        			"quantity":3
+
+		        		}
+		        	]
+
+		        };
+		        if (cartData.result=="ok") {
+		        	
+		        	for (var i = cartData.parm.length - 1; i >= 0; i--) {
+		        		unit_price[cartData.parm[i].product_name] = cartData.parm[i].unit_price;
+		        		html = '<div class="aui-card-list" >'
+		        		html += '<div class="aui-card-list-header"><input class="aui-checkbox aui-col-xs-4" type="checkbox" name="" checked></div>'
+		        		html += '<div class="aui-card-list-content-padded">'
+		        		html += '<div class="aui-row aui-row-padded">'
+		        		html += '<div class="aui-col-xs-4">'+cartData.parm[i].product_name+'</div>'
+		        		html += '<div class="aui-col-xs-4 aui-pull-right"><div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:100px;float:right"><div class="aui-bar-btn-item" name="decrement"><i class="aui-iconfont aui-icon-minus"></i></div><div class="aui-bar-btn-item"><input type="number" class="aui-input aui-text-center" value="'+cartData.parm[i].quantity+'" name="count" readonly="readonly"></div><div class="aui-bar-btn-item" name="increment"><i class="aui-iconfont aui-icon-plus"></i></div></div></div></div></div>'
+		        		html += '<div class="aui-card-list-footer">'
+		        		html += '<div class="aui-pull-left 1">金额:￥'+(cartData.parm[i].unit_price*cartData.parm[i].quantity)+'</div>'
+		        		html += '</div></div>'
+		        		$('#border').append(html);
+
+
+		        	}
+		        	console.log(unit_price);
+		        }else{
+		        	alert('获取购物车信息失败');
+		        }
+
+			}
+
+
+	$('div[name=decrement]').click(function Decrement(e){
+		var priceNode =  $(this).parent().parent().parent().parent().next().children("div.1");
+		var countNode = $(this).next().children();
+		if (parseInt(countNode.val())>1) {
+			
+			var unit_price = GetUnitPrice($(this).parent().parent().prev().text());
+			countNode.val(parseInt(countNode.val())-1);
+			/*$.ajax({
+
+			});*/
+			priceNode.text("金额：￥"+(unit_price*countNode.val()));
+		}else{
+			//订单数等于0 删除
+			$.confirm({
+			  title: '确认删除',
+			  text: '确认删除该订单吗？',
+			  onOK: function () {
+			    //点击确认
+			    /*$.ajax({
+
+				});*/
+	         	 priceNode.parent().parent().remove();
+			  },
+			  onCancel: function () {
+			  	//点击取消
+
+			  }
+			});
+			
+		}
+	})
+
+	$('div[name=increment]').click(function Increment(e){
+		var priceNode =  $(this).parent().parent().parent().parent().next().children("div.1");
+		var countNode = $(this).prev().children();
+		if (true) {
+			var unit_price = GetUnitPrice($(this).parent().parent().prev().text());
+			countNode.val(parseInt(countNode.val())+1);
+
+			/*$.ajax({
+
+			});*/
+
+			priceNode.text("金额：￥"+(unit_price*countNode.val()));
+		}
+		
+	})
+
+	//限制输入为非零数字
+	/*$("input[name='count']").keyup(function(){   
+            var tmptxt=$(this).val();
+            if (tmptxt.replace(/\D|^0/g,'1')!='') {
+            	
+            	$(this).val(tmptxt.replace(/\D|^0/g,''));
+            }else{
+
+            }
+                   
+        }).bind("paste",function(){       
+            var tmptxt=$(this).val();       
+            $(this).val(tmptxt.replace(/\D|^0/g,''));       
+        }).css("ime-mode", "disabled");*/
+    
+    //获得单价
+	function GetUnitPrice(product){
+		return unit_price[product];
+	}
+
+	//购买
+	function Buy(){
+		
+		/*$.ajax({
+            cache: true,
+            type: "POST",
+            url: ,
+            data: ,
+            async: false,
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                
+            }
+        });*/
+	}
+</script>
 
 <style type="text/css">
 	.input-number {
@@ -109,59 +313,5 @@
 
 	}
 </style>
-
-<script type="text/javascript">
-	var type = "edit";
-	function edit(obj){
-		if (type=="edit") {
-			obj.innerHTML="确定";
-			type = "save";
-			console.log(obj);
-		}
-		else{
-			obj.innerHTML="编辑";
-			type = "edit";
-		}
-		
-	}
-
-	function countReduce(obj){
-
-		var countNode = obj.nextElementSibling;
-		if (parseInt(countNode.value)>0) {
-			countNode.value = parseInt(countNode.value)-1;
-		}
-	}
-
-	function countAdd(obj){
-
-		var countNode = obj.previousElementSibling;
-		if (true) {
-			countNode.value = parseInt(countNode.value)+1;
-		}
-		
-	}
-
-	function inputChange(input){
-		console.log(input.value);
-	}
-
-	function Buy(){
-		console.log("buy click");
-		/*$.ajax({
-            cache: true,
-            type: "POST",
-            url: ,
-            data: ,
-            async: false,
-            error: function (request) {
-                alert("Connection error");
-            },
-            success: function (data) {
-                
-            }
-        });*/
-	}
-</script>
 
 </html>
