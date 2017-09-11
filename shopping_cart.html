@@ -2,28 +2,31 @@
 <html>
 <head>
 	<meta charset="utf-8">
+
     <meta name="viewport"
           content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/> 
     <link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
+
     <link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
     <link rel="stylesheet" href="./jquery-weui/css/jquery-weui.css">
+
+    <link rel="stylesheet" type="text/css" href="./menu/css/style.css">
+
     <script type = "text/javascript" src = "./jquery-3.2.1/jquery-3.2.1.min.js"></script> 
    <!-- <link data-th-href="@{/jquery-weui/css/jquery-weui.min.css}" rel="stylesheet"> -->
 
 
 	
 	<title>购物车</title>
+
 </head>
+
 <body>
+
 	<section class="aui-content-padded" id=border>
 
-		<script type="text/javascript">
-			
-			
-			
-
-
-		</script>
+		
 
 <!--
 		<div class="aui-card-list aui-row aui-row-padded" >
@@ -71,8 +74,65 @@
 	</section>
 
 	<footer class="aui-bar aui-bar-tab"> 
+
 	    <div class="weui-btn weui-btn_primary aui-bar-tab-item"  onclick="Buy()" tapmode>购买</div>
+	
 	</footer>
+
+	<script type="text/javascript">
+
+
+		function DropDown(el) {
+
+				this.dd = el;
+
+				this.initEvents();
+
+			}
+
+			DropDown.prototype = {
+
+				initEvents : function() {
+
+					var obj = this;
+
+
+
+					obj.dd.on('click', function(event){
+
+						$(this).toggleClass('active');
+
+						event.stopPropagation();
+
+					});	
+
+				}
+
+			}
+
+
+
+			$(function() {
+
+
+
+				var dd = new DropDown( $('div[name=menu]') );
+
+
+
+				$(document).click(function() {
+
+					// all dropdowns
+
+					$('.wrapper-dropdown-3').removeClass('active');
+
+				});
+
+
+
+			});
+	</script>
+
 </body>
 
 
@@ -84,16 +144,21 @@
 -->
 
 <script type="text/javascript" src="./jquery-weui/js/jquery-weui.min.js" ></script>
+
 <script type="text/javascript">
 
 			var cartData={};
+
 			var unit_price=[];
 			
 			$(document).ready(GetInfo());
 			
 			function GetInfo(){
+
 				var html;
+
 				var path;
+
 				//获取购物车信息
 				/*$.ajax({
 		            cache: true,
@@ -110,9 +175,13 @@
 		            }
 		        });*/
 		        cartData = {
+
 		        	"result":"ok",
+
 		        	"errMsg":"",
+
 		        	"parm":[
+
 		        		{
 		        			"cart_id":"",
 		        			"cart_itemid":"1230",
@@ -121,15 +190,8 @@
 		        			"unit_price":0.01,
 		        			"quantity":3
 
-		        		},{
-		        			"cart_id":"",
-		        			"cart_itemid":"1230",
-		        			"product_id":"32132146-4564-56465",
-		        			"product_name":"糖尿病早期筛查",
-		        			"unit_price":0.01,
-		        			"quantity":3
-
-		        		},{
+		        		},
+		        		{
 		        			"cart_id":"",
 		        			"cart_itemid":"1230",
 		        			"product_id":"32132146-4564-56465",
@@ -152,13 +214,13 @@
 		        		html += '<div class="aui-col-xs-4">'+cartData.parm[i].product_name+'</div>'
 		        		html += '<div class="aui-col-xs-4 aui-pull-right"><div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:100px;float:right"><div class="aui-bar-btn-item" name="decrement"><i class="aui-iconfont aui-icon-minus"></i></div><div class="aui-bar-btn-item"><input type="number" class="aui-input aui-text-center" value="'+cartData.parm[i].quantity+'" name="count" readonly="readonly"></div><div class="aui-bar-btn-item" name="increment"><i class="aui-iconfont aui-icon-plus"></i></div></div></div></div></div>'
 		        		html += '<div class="aui-card-list-footer">'
-		        		html += '<div class="aui-pull-left 1">金额:￥'+(cartData.parm[i].unit_price*cartData.parm[i].quantity)+'</div>'
+		        		html += '<div class="aui-pull-left 1">金额:￥'+(cartData.parm[i].unit_price*cartData.parm[i].quantity)+'</div><div class="aui-pull-right"><div name="menu" class="wrapper-dropdown-3" tabindex="1">检测人<ul class="dropdown" name="people_list"><li><a href="#">someone</a></li></ul></div></div>'
 		        		html += '</div></div>'
 		        		$('#border').append(html);
 
 
 		        	}
-		        	console.log(unit_price);
+		        	//console.log(unit_price);
 		        }else{
 		        	alert('获取购物车信息失败');
 		        }
