@@ -68,208 +68,87 @@
 		</div>
 
 	</div>
-	-->	
+-->	
 
 
 
-	<div class="weui-cells weui-cells_checkbox">
-		<div class="weui-panel weui-panel_access">
-			<!--<div class="weui-panel__hd"></div>-->
-			<div class="weui-panel__bd">
-			    <div class="weui-cell">
-				    <label class="weui-cell__hd weui-check__label">
-				      <input type="checkbox" class="weui-check" name="checkbox" checked="checked">
-				      <i class="weui-icon-checked"></i>
-				    </label> 
-				    <div class="weui-cell__bd">
-				      	<div class="weui-media-box weui-media-box_appmsg">
-					     	<div class="weui-media-box__hd">
-					        	<img class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505831449&di=bdfe5ce42a5f422a8cc4926dbd8d73a7&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.jsqq.net%2Fuploads%2Fallimg%2F140323%2F1_140323064336_4.jpg">
-					    	</div>
-					    	<div class="weui-media-box__bd">
-					        	<h4 class="weui-media-box__title">糖尿病检测</h4>
-					    		<div class="weui-media-box__desc">
-					        		<p>金额:￥50</p>
-					        	</div>
-					    	</div>
-					    	
-					    </div>
-				    </div>
-				    <div class="weui-cell__ft">
-						<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:70px">
-				            <div class="aui-bar-btn-item" name="decrement">
-				                <i class="aui-iconfont aui-icon-minus"></i>
-				            </div>
-				            <div class="aui-bar-btn-item">
-				                <input type="number" disabled="true" class="aui-input aui-text-center" value="1" >
-				            </div>
-				            <div class="aui-bar-btn-item" name="increment">
-				                <i class="aui-iconfont aui-icon-plus"></i>
-				            </div>
-				        </div>
-				    </div>
+<div class="weui-cells weui-cells_checkbox" id="content">
+<!--
+	<div class="weui-panel weui-panel_access">
+
+		<div class="weui-panel__bd">
+			<div class="weui-cell">
+				<label class="weui-cell__hd weui-check__label">
+					<input type="checkbox" class="weui-check" name="checkbox" checked="checked">
+					<i class="weui-icon-checked"></i>
+				</label> 
+				<div class="weui-cell__bd">
+					<div class="weui-media-box weui-media-box_appmsg">
+						<div class="weui-media-box__hd">
+							<img class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505831449&di=bdfe5ce42a5f422a8cc4926dbd8d73a7&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.jsqq.net%2Fuploads%2Fallimg%2F140323%2F1_140323064336_4.jpg">
+						</div>
+						<div class="weui-media-box__bd">
+							<h4 class="weui-media-box__title" style="word-wrap:break-word; word-break:normal;font-size: 13px;" h_name>糖尿病早期筛查</h4>
+							<div class="weui-media-box__desc">
+								<p  p_price>金额:￥50</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="weui-cell__ft">
+					<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:70px">
+						<div class="aui-bar-btn-item" name="decrement">
+							<i class="aui-iconfont aui-icon-minus"></i>
+						</div>
+						<div class="aui-bar-btn-item">
+							<input type="number" disabled="true" class="aui-input aui-text-center" value="1" >
+						</div>
+						<div class="aui-bar-btn-item" name="increment">
+							<i class="aui-iconfont aui-icon-plus"></i>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="weui-panel__ft">
-			    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link" name="people">
-			    	<div class="weui-cell__hd"></div>
-			    	<div class="weui-cell__bd">检测人</div>
-			    	<span class="weui-cell__ft"></span>
-			    </a>
-			    <ul class="people-ist" name="people_list">
-			    	<li class="weui-cell weui-cell_link">
-			    		<div class="weui-cell__hd"></div>
-			    		<div class="weui-cell__bd">李狗蛋</div>
-			    		<div class="weui-cell__ft">
-			    			<i class="weui-icon-cancel"></i>
-			    		</div>
-			    	</li>
-			    	<li>
-			    		<div style="display:flex; justify-content:center; margin: 10px auto;">
-			    			<div class="weui-btn weui-btn_mini weui-btn_primary">添加检测人</div>
-			    		</div>
-			    		
-			    	</li>
-			    </ul>
-			</div>
 		</div>
+		<div class="weui-panel__ft">
+			<a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link" name="showPeople">
+				<div class="weui-cell__hd"></div>
+				<div class="weui-cell__bd">检测人</div>
+				<span class="weui-cell__ft"></span>
+			</a>
+			<ul class="people-ist" name="people_list" style="display: none">
+				<li class="weui-cell weui-cell_link">
+					<div class="weui-cell__hd"></div>
+					<div class="weui-cell__bd" name="">李狗蛋</div>
+					<div class="weui-cell__ft">
+						<i class="weui-icon-cancel" name="delete"></i>
+					</div>
+				</li>
+				<li>
+					<div style="display:flex; justify-content:center; margin: 10px auto;">
+					<div class="weui-btn weui-btn_mini weui-btn_primary" name="add">添加检测人</div>
+					</div>
 
-		<div class="weui-panel weui-panel_access">
-			<!--<div class="weui-panel__hd"></div>-->
-			<div class="weui-panel__bd">
-			    <div class="weui-cell">
-				    <label class="weui-cell__hd weui-check__label">
-				      <input type="checkbox" class="weui-check" name="checkbox" checked="checked">
-				      <i class="weui-icon-checked"></i>
-				    </label> 
-				    <div class="weui-cell__bd">
-				      	<div class="weui-media-box weui-media-box_appmsg">
-					     	<div class="weui-media-box__hd">
-					        	<img class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505831449&di=bdfe5ce42a5f422a8cc4926dbd8d73a7&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.jsqq.net%2Fuploads%2Fallimg%2F140323%2F1_140323064336_4.jpg">
-					    	</div>
-					    	<div class="weui-media-box__bd">
-					        	<h4 class="weui-media-box__title">糖尿病检测</h4>
-					    		<div class="weui-media-box__desc">
-					        		<p>金额:￥50</p>
-					        	</div>
-					    	</div>
-					    	
-					    </div>
-				    </div>
-				    <div class="weui-cell__ft">
-						<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:70px">
-				            <div class="aui-bar-btn-item" name="decrement">
-				                <i class="aui-iconfont aui-icon-minus"></i>
-				            </div>
-				            <div class="aui-bar-btn-item">
-				                <input type="number" disabled="true" class="aui-input aui-text-center" value="1" >
-				            </div>
-				            <div class="aui-bar-btn-item" name="increment">
-				                <i class="aui-iconfont aui-icon-plus"></i>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-			</div>
-			<div class="weui-panel__ft">
-			    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link" name="people">
-			    	<div class="weui-cell__hd"></div>
-			    	<div class="weui-cell__bd">检测人</div>
-			    	<span class="weui-cell__ft"></span>
-			    </a>
-			    <ul class="people-ist" name="people_list">
-			    	<li class="weui-cell weui-cell_link">
-			    		<div class="weui-cell__hd"></div>
-			    		<div class="weui-cell__bd">李狗蛋</div>
-			    		<div class="weui-cell__ft">
-			    			<i class="weui-icon-cancel"></i>
-			    		</div>
-			    	</li>
-			    	<li class="weui-cell weui-cell_link">
-			    		<div class="weui-cell__hd"></div>
-			    		<div class="weui-cell__bd">李狗蛋</div>
-			    		<div class="weui-cell__ft">
-			    			<i class="weui-icon-cancel"></i>
-			    		</div>
-			    	</li>
-			    	<li>
-			    		<div style="display:flex; justify-content:center; margin: 10px auto;">
-			    			<div class="weui-btn weui-btn_mini weui-btn_primary">添加检测人</div>
-			    		</div>
-			    		
-			    	</li>
-			    </ul>
-			</div>
+				</li>
+			</ul>
 		</div>
-		
-		
 	</div>
+-->
+</div>
+
+
+
+
+
+</section>
+
+<footer class="aui-bar aui-bar-tab"> 
+
+	<div class="weui-btn weui-btn_primary aui-bar-tab-item"  onclick="Buy()" tapmode>购买</div>
 	
+</footer>
 
-	
-
-
-	</section>
-
-	<footer class="aui-bar aui-bar-tab"> 
-
-	    <div class="weui-btn weui-btn_primary aui-bar-tab-item"  onclick="Buy()" tapmode>购买</div>
-	
-	</footer>
-
-	<script type="text/javascript">
-
-
-		function DropDown(el) {
-
-				this.dd = el;
-
-				this.initEvents();
-
-			}
-
-		DropDown.prototype = {
-
-			initEvents : function() {
-
-				var obj = this;
-
-
-
-				obj.dd.on('click', function(event){
-
-					$(this).toggleClass('active');
-
-					event.stopPropagation();
-
-				});	
-
-			}
-
-		}
-
-
-
-		$(function() {
-
-
-
-			var dd = new DropDown( $('div[name=menu]') );
-
-
-
-			$(document).click(function() {
-
-				// all dropdowns
-
-				$('.wrapper-dropdown-3').removeClass('active');
-
-			});
-
-
-
-		});
-	</script>
 
 </body>
 
@@ -285,17 +164,16 @@
 
 <script type="text/javascript">
 
-			var cartData={};
+	var cartData={};
 
-			var unit_price=[];
-			
-			$(document).ready(GetInfo());
-			
-			function GetInfo(){
+	var unit_price=[];
 
-				var html;
+	$(document).ready(Draw());
 
-				var path;
+	function GetData(){
+
+
+		var path;
 
 				//获取购物车信息
 				/*$.ajax({
@@ -314,47 +192,103 @@
 		        });*/
 		        cartData = {
 
-		        	"result":"none",
+		        	"result":"ok",
 
 		        	"errMsg":"",
 
 		        	"parm":[
 
-		        		{
-		        			"cart_id":"",
-		        			"cart_itemid":"1230",
-		        			"product_id":"32132146-4564-56465",
-		        			"product_name":"糖尿病早期筛查",
-		        			"unit_price":0.01,
-		        			"quantity":3
+		        	{
+		        		"cart_id":"",
+		        		"cart_itemid":"1230",
+		        		"product_id":"32132146-4564-56465",
+		        		"product_name":"糖尿病早期筛查",
+		        		"unit_price":0.01,
+		        		"quantity":3
 
-		        		},
-		        		{
-		        			"cart_id":"",
-		        			"cart_itemid":"1230",
-		        			"product_id":"32132146-4564-56465",
-		        			"product_name":"糖尿病早期筛查",
-		        			"unit_price":0.01,
-		        			"quantity":3
+		        	},
+		        	{
+		        		"cart_id":"",
+		        		"cart_itemid":"1230",
+		        		"product_id":"32132146-4564-56465",
+		        		"product_name":"糖尿病早期筛查",
+		        		"unit_price":0.01,
+		        		"quantity":3
 
-		        		}
+		        	}
 		        	]
 
 		        };
-		        if (cartData.result=="ok") {
-		        	
-		        	for (var i = cartData.parm.length - 1; i >= 0; i--) {
-		        		unit_price[cartData.parm[i].product_name] = cartData.parm[i].unit_price;
-		        		html = '<div class="aui-card-list" >'
-		        		html += '<div class="aui-card-list-header"><input class="aui-checkbox aui-col-xs-4" type="checkbox" name="" checked></div>'
-		        		html += '<div class="aui-card-list-content-padded">'
-		        		html += '<div class="aui-row aui-row-padded">'
-		        		html += '<div class="aui-col-xs-4">'+cartData.parm[i].product_name+'</div>'
-		        		html += '<div class="aui-col-xs-4 aui-pull-right"><div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:100px;float:right"><div class="aui-bar-btn-item" name="decrement"><i class="aui-iconfont aui-icon-minus"></i></div><div class="aui-bar-btn-item"><input type="number" class="aui-input aui-text-center" value="'+cartData.parm[i].quantity+'" name="count" readonly="readonly"></div><div class="aui-bar-btn-item" name="increment"><i class="aui-iconfont aui-icon-plus"></i></div></div></div></div></div>'
-		        		html += '<div class="aui-card-list-footer">'
-		        		html += '<div class="aui-pull-left 1">金额:￥'+(cartData.parm[i].unit_price*cartData.parm[i].quantity)+'</div><div class="aui-pull-right"><div name="menu" class="wrapper-dropdown-3" tabindex="1">检测人<ul class="dropdown" name="people_list"><li><a href="#">someone</a></li></ul></div></div>'
-		        		html += '</div></div>'
-		        		$('#border').append(html);
+		    }
+
+		    function Draw(){
+
+		    	var html;
+
+		    	GetData();
+
+		    	if (cartData.result=="ok") {
+
+		    		for (var i = cartData.parm.length - 1; i >= 0; i--) {
+		    			unit_price[cartData.parm[i].product_name] = cartData.parm[i].unit_price;
+		        		
+		    			html  = 	'<div class="weui-panel weui-panel_access">'
+
+		    			html += '<div class="weui-panel__bd">'
+		    			html += '<div class="weui-cell">'
+		    			html += '<label class="weui-cell__hd weui-check__label">'
+		    			html += '<input type="checkbox" class="weui-check" name="checkbox" checked="checked">'
+		    			html += '<i class="weui-icon-checked"></i>'
+		    			html += '</label> '
+		    			html += '<div class="weui-cell__bd">'
+		    			html += '<div class="weui-media-box weui-media-box_appmsg">'
+		    			html += '<div class="weui-media-box__hd">'
+		    			html += '<img class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505831449&di=bdfe5ce42a5f422a8cc4926dbd8d73a7&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.jsqq.net%2Fuploads%2Fallimg%2F140323%2F1_140323064336_4.jpg">'
+		    			html += '</div>'
+		    			html += '<div class="weui-media-box__bd">'
+		    			html += '<h4 class="weui-media-box__title" style="word-wrap:break-word; word-break:normal;font-size: 13px;">'+cartData.parm[i].product_name+'</h4>'
+		    			
+		    			html += '<div class="weui-media-box__desc">'
+		    			html += 	'<p>金额：￥'+(cartData.parm[i].unit_price*cartData.parm[i].quantity)+'</p>'
+		    			html += '</div>'
+		    			html += '</div>'
+
+		    			html += '</div>'
+		    			html += '</div>'
+		    			html += '<div class="weui-cell__ft">'
+		    			html += '<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:70px">'
+		    			html += 	'<div class="aui-bar-btn-item" name="decrement">'
+		    			html += 	'<i class="aui-iconfont aui-icon-minus"></i>'
+		    			html += '</div>'
+		    			html += '<div class="aui-bar-btn-item">'
+		    			html += 	'<input type="number" disabled="true" class="aui-input aui-text-center" value="'+cartData.parm[i].quantity+'" >'
+		    			html += '</div>'
+		    			html += '<div class="aui-bar-btn-item" name="increment">'
+		    			html += '<i class="aui-iconfont aui-icon-plus"></i>'
+		    			html += '</div>'
+		    			html += '</div>'
+		    			html += '</div>'
+		    			html += '</div>'
+		    			html += '</div>'
+		    			html += '<div class="weui-panel__ft">'
+		    			html += '<a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link" name="showPeople">'
+		    			html += '<div class="weui-cell__hd"></div>'
+		    			html += '<div class="weui-cell__bd">检测人</div>'
+		    			html += 				'<span class="weui-cell__ft"></span>'
+		    			html += 			'</a>'
+		    			html += 		'<ul class="people-ist" name="people_list" style="display: none">'			
+		    			html += 	'<li>'
+		    			html += '<div style="display:flex; justify-content:center; margin: 10px auto;">'
+		    			html += 	'<div class="weui-btn weui-btn_mini weui-btn_primary" name="add">添加检测人</div>'
+		    			html += 	'</div>'
+
+		    			html += '</li>'
+		    			html += '</ul>'
+		    			html += '</div>'
+		    			html += '</div>'
+
+		        		console.log(unit_price);
+		        		$('#content').append(html);
 
 
 		        	}
@@ -363,15 +297,15 @@
 		        	alert('获取购物车信息失败');
 		        }
 
-			}
+		    }
 
 	//减少数量
 	$('div[name=decrement]').click(function Decrement(e){
-		var priceNode =  $(this).parent().parent().parent().parent().next().children("div.1");
+		var priceNode =  $(this).parent().parent().prev().find("p");
 		var countNode = $(this).next().children();
 		if (parseInt(countNode.val())>1) {
 			
-			var unit_price = GetUnitPrice($(this).parent().parent().prev().text());
+			var unit_price = GetUnitPrice($(this).parent().parent().prev().find("h4").text());
 			countNode.val(parseInt(countNode.val())-1);
 			/*$.ajax({
 
@@ -380,16 +314,16 @@
 		}else{
 			//订单数等于0 删除
 			$.confirm({
-			  title: '确认删除',
-			  text: '确认删除该订单吗？',
-			  onOK: function () {
+				title: '确认删除',
+				text: '确认删除该订单吗？',
+				onOK: function () {
 			    //点击确认
 			    /*$.ajax({
 
-				});*/
-	         	 priceNode.parent().parent().remove();
-			  },
-			  onCancel: function () {
+			    });*/
+			    priceNode.parent().parent().remove();
+			},
+			onCancel: function () {
 			  	//点击取消
 
 			  }
@@ -400,10 +334,10 @@
 
 	//增加数量
 	$('div[name=increment]').click(function Increment(e){
-		var priceNode =  $(this).parent().parent().parent().parent().next().children("div.1");
+		var priceNode =  $(this).parent().parent().prev().find("p");
 		var countNode = $(this).prev().children();
 		if (countNode.val()<9) {
-			var unit_price = GetUnitPrice($(this).parent().parent().prev().text());
+			var unit_price = GetUnitPrice($(this).parent().parent().prev().find("h4").text());
 			countNode.val(parseInt(countNode.val())+1);
 
 			/*$.ajax({
@@ -415,13 +349,14 @@
 		
 	})
 
-	$('a[name=people]').click(function(e){
+	//弹出检测人框
+	$('a[name=showPeople]').click(function(e){
 		$(this).next().slideDown();
 		e.stopPropagation();
 	});
 
 	
-
+	//收回检测人框
 	$(document).click(function(e){
 		$('ul[name=people_list]').slideUp();
 	});
@@ -441,11 +376,11 @@
             var tmptxt=$(this).val();       
             $(this).val(tmptxt.replace(/\D|^0/g,''));       
         }).css("ime-mode", "disabled");*/
-    
+
     //获得单价
-	function GetUnitPrice(product){
-		return unit_price[product];
-	}
+    function GetUnitPrice(product){
+    	return unit_price[product];
+    }
 
 	//购买
 	function Buy(){
@@ -463,7 +398,7 @@
                 
             }
         });*/
-	}
+    }
 </script>
 
 <style type="text/css">
