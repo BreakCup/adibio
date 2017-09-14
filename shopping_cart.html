@@ -11,8 +11,6 @@
 
     <link rel="stylesheet" href="./jquery-weui/css/jquery-weui.css">
 
-    <link rel="stylesheet" type="text/css" href="./menu/css/style.css">
-
     <script type = "text/javascript" src = "./jquery-3.2.1/jquery-3.2.1.min.js"></script> 
    <!-- <link data-th-href="@{/jquery-weui/css/jquery-weui.min.css}" rel="stylesheet"> -->
 
@@ -24,55 +22,38 @@
 
 <body>
 
-	<section class="" style="margin-bottom:50px; " id=border>
+<section class="" style="margin-bottom:50px; " id=border>
 
-	<!--	
-	<div class="aui-row aui-row-padded" style="background-color: #fff; display: flex;flex-direction: row;justify-content: center;align-items:center;>
-		<dir class="aui-col-xs-1" >
-			<input class="aui-checkbox aui-col-xs-4" type="checkbox" name="" checked>
-		</dir>
+<div class="weui-cells weui-cells_checkbox"  id="content">
 
-		<div class="aui-card-list aui-col-xs-11" >
-			<div class="aui-card-list-content-padded">
-				
+	<div id="pop_select" class="weui-popup__container popup-bottom" style="z-index: 999; ">
+		<div class="weui-popup__overlay"></div>
+		<div class="weui-popup__modal">
+			<div class="toolbar">
+				<div class="toolbar-inner">
+					<a href="javascript:;" class="picker-button close-popup">关闭</a>
+					<h1 class="title">添加检测人</h1>
+				</div>
 			</div>
-		
-		    <div class="aui-card-list-header">
-		    	
-		    </div>
-		 	<div class="aui-card-list-content-padded">
-		 		<div class="aui-row aui-row-padded">
-		 			
-		            <div class="aui-col-xs-4">糖尿病检测服务</div>
-		            <div class="aui-col-xs-4 aui-pull-right">
-		            	<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:100px;float:right">
-		                    <div class="aui-bar-btn-item" id="decrement">
-		                        <i class="aui-iconfont aui-icon-minus"></i>
-		                    </div>
-		                    <div class="aui-bar-btn-item">
-		                        <input type="number" class="aui-input aui-text-center" value="1" >
-		                    </div>
-		                    <div class="aui-bar-btn-item" id="increment">
-		                        <i class="aui-iconfont aui-icon-plus"></i>
-		                    </div>
-		                </div>
-            	
-		            </div>
-		        </div>
-		    	
-		    </div>
-		    <div class="aui-card-list-footer">
-		    	
-		    	<div class="aui-pull-left" >金额:￥50</div>  	
-		    </div>
+			<div class="modal-content">
+				<div class="weui-cells">
+					<div class="weui-cell">
+						<a class="weui-cell__bd" href="#">
+							检测人1
+						</a>
+						<a class="weui-cell__ft">添加</a>
+					</div>
+				</div>
+			</div>
 		</div>
-
 	</div>
--->	
 
-
-
-<div class="weui-cells weui-cells_checkbox" id="content">
+	<div id="pop_write" class="weui-popup__container " style="z-index: 999; ">
+		<div class="weui-popup__overlay"></div>
+		<div class="weui-popup__modal">
+			<h1>信息填写</h1>
+		</div>
+	</div>
 <!--
 	<div class="weui-panel weui-panel_access">
 
@@ -88,16 +69,16 @@
 							<img class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505831449&di=bdfe5ce42a5f422a8cc4926dbd8d73a7&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.jsqq.net%2Fuploads%2Fallimg%2F140323%2F1_140323064336_4.jpg">
 						</div>
 						<div class="weui-media-box__bd">
-							<h4 class="weui-media-box__title" style="word-wrap:break-word; word-break:normal;font-size: 13px;" h_name>糖尿病早期筛查</h4>
+							<h4 class="weui-media-box__title" style="width:91px;word-wrap:break-word; word-break:normal;font-size: 13px;">糖尿病早期筛查</h4>
 							<div class="weui-media-box__desc">
-								<p  p_price>金额:￥50</p>
+								<p >金额:￥50</p>
 							</div>
 						</div>
 
 					</div>
 				</div>
 				<div class="weui-cell__ft">
-					<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:70px">
+					<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:72px">
 						<div class="aui-bar-btn-item" name="decrement">
 							<i class="aui-iconfont aui-icon-minus"></i>
 						</div>
@@ -163,26 +144,30 @@
 <script type="text/javascript" src="./jquery-weui/js/jquery-weui.min.js" ></script>
 
 <script type="text/javascript">
+	 var context = /*[[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]]*/;
 
 	var cartData={};
 
 	var unit_price=[];
 
-	$(document).ready(Draw());
+	$(document).ready(
+		GetCartData(),
+		Draw()
+	);
 
-	function GetData(){
+	function GetCartData(){
 
 
-		var path;
+		var path = context +  '/show_cart_info';
 
 				//获取购物车信息
-				/*$.ajax({
+				/*var cartDataXml = $.ajax({
 		            cache: true,
 		            type: "GET",
 		            url: path,
 		            data: "get shopping car info",// 
 		            dataType:json,
-		            async: true,
+		            async: false,
 		            error: function (request) {
 		                
 		            },
@@ -211,7 +196,7 @@
 		        		"cart_id":"",
 		        		"cart_itemid":"1230",
 		        		"product_id":"32132146-4564-56465",
-		        		"product_name":"糖尿病早期筛查",
+		        		"product_name":"肾病早期筛查",
 		        		"unit_price":0.01,
 		        		"quantity":3
 
@@ -225,14 +210,13 @@
 
 		    	var html;
 
-		    	GetData();
 
 		    	if (cartData.result=="ok") {
 
 		    		for (var i = cartData.parm.length - 1; i >= 0; i--) {
 		    			unit_price[cartData.parm[i].product_name] = cartData.parm[i].unit_price;
-		        		
-		    			html  = 	'<div class="weui-panel weui-panel_access">'
+
+		    			html  = '<div class="weui-panel weui-panel_access">'
 
 		    			html += '<div class="weui-panel__bd">'
 		    			html += '<div class="weui-cell">'
@@ -246,7 +230,7 @@
 		    			html += '<img class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505831449&di=bdfe5ce42a5f422a8cc4926dbd8d73a7&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.jsqq.net%2Fuploads%2Fallimg%2F140323%2F1_140323064336_4.jpg">'
 		    			html += '</div>'
 		    			html += '<div class="weui-media-box__bd">'
-		    			html += '<h4 class="weui-media-box__title" style="word-wrap:break-word; word-break:normal;font-size: 13px;">'+cartData.parm[i].product_name+'</h4>'
+		    			html += '<h4 class="weui-media-box__title" style="width:91px;word-wrap:break-word; word-break:normal;font-size: 13px;">'+cartData.parm[i].product_name+'</h4>'
 		    			
 		    			html += '<div class="weui-media-box__desc">'
 		    			html += 	'<p>金额：￥'+(cartData.parm[i].unit_price*cartData.parm[i].quantity)+'</p>'
@@ -256,7 +240,7 @@
 		    			html += '</div>'
 		    			html += '</div>'
 		    			html += '<div class="weui-cell__ft">'
-		    			html += '<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:70px">'
+		    			html += '<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:72px">'
 		    			html += 	'<div class="aui-bar-btn-item" name="decrement">'
 		    			html += 	'<i class="aui-iconfont aui-icon-minus"></i>'
 		    			html += '</div>'
@@ -287,17 +271,43 @@
 		    			html += '</div>'
 		    			html += '</div>'
 
-		        		console.log(unit_price);
-		        		$('#content').append(html);
+
+		    			$('#content').append(html);
 
 
-		        	}
-		        	
-		        }else{
-		        	alert('获取购物车信息失败');
-		        }
+		    		}
+
+		    	}else{
+		    		alert('获取购物车信息失败');
+		    	}
 
 		    }
+	//查询购物车项目对应的患者信息
+	function GetPeopleofCartInfo(req){
+		var patientInfo;
+		var path = context + "";
+		/*var patientInfoXml = $.ajax({
+		            cache: true,
+		            type: "GET",
+		            url: path,
+		            data: "get shopping car info",// 
+		            dataType:json,
+		            async: false,
+		            error: function (request) {
+		                
+		            },
+		            success: function (data) {
+		                patientInfo = data
+		            }
+		        });*/
+		if (patientInfoXml.response == '200') {
+
+		}else{
+			return patientInfo;
+		}
+
+	}
+
 
 	//减少数量
 	$('div[name=decrement]').click(function Decrement(e){
@@ -352,6 +362,9 @@
 	//弹出检测人框
 	$('a[name=showPeople]').click(function(e){
 		$(this).next().slideDown();
+		//获取购物车检测人名单/已保存的检测人
+
+
 		e.stopPropagation();
 	});
 
@@ -361,21 +374,30 @@
 		$('ul[name=people_list]').slideUp();
 	});
 	
+	//添加检测人
+	$("div[name=add]").click(function(e){
+		//弹出已保存的人名单，无保存的填写信息
+		if(true){
+			//弹出检测人选择框
+			$("#pop_select").popup();
+		}else{
+			//弹出全屏的信息填写框
+			$("#pop_write").popup();
+		}
+		e.stopPropagation();
+	})
 
-	//限制输入为非零数字
-	/*$("input[name='count']").keyup(function(){   
-            var tmptxt=$(this).val();
-            if (tmptxt.replace(/\D|^0/g,'1')!='') {
-            	
-            	$(this).val(tmptxt.replace(/\D|^0/g,''));
-            }else{
+	//删除检测人
+	$("i[name=delete]").click(function(e){
+		e.stopPropagation();
+	});
 
-            }
-                   
-        }).bind("paste",function(){       
-            var tmptxt=$(this).val();       
-            $(this).val(tmptxt.replace(/\D|^0/g,''));       
-        }).css("ime-mode", "disabled");*/
+	//阻止添加检测人框触发的冒泡事件
+	/*$("#pop").click(function(e){
+		e.stopPropagation();
+	})*/
+
+
 
     //获得单价
     function GetUnitPrice(product){

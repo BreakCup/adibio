@@ -10,13 +10,13 @@
           content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    
+ <!--     
     <link rel="stylesheet" type="text/css" data-th-href="@{/AUI/css/aui.css}"/>
     <link data-th-href="@{/jquery-weui/css/jquery-weui.min.css}" rel="stylesheet">
- <!--   
+  -->
     <link href="./jquery-weui/css/jquery-weui.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./AUI/css/aui.css"/>
--->
+
     <title>服务购买</title>
 
 </head>
@@ -150,7 +150,7 @@
         <input type="hidden" th:value="${product.product_id}" name="product_id">
         <div style="display: flex;flex-direction: row">
             <input class="aui-checkbox" type="radio" name="isagree" onclick="agreeClick(this)">
-            <p>同意该<a href="#">协议</a>才能购买</p>
+            <p>阅读并同意该协议<a href="#">《协议》</a></p>
         </div>
         <!--
         <label for="adibioAgree" class="weui-agree">
@@ -174,12 +174,14 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--
 <script type="text/javascript" data-th-src="@{/AUI/script/aui-dialog.js}"></script>
 <script data-th-src="@{/jquery-weui/js/jquery-weui.min.js}"></script>
 <script data-th-src="@{/jquery-weui/js/city-picker.min.js}"></script>
-<!--<script type="text/javascript" src="./AUI/script/aui-dialog.js"></script>
+-->
+<script type="text/javascript" src="./AUI/script/aui-dialog.js"></script>
 <script src="./jquery-weui/js/jquery-weui.min.js"></script>
-<script src="./jquery-weui/js/city-picker.min.js"></script>-->
+<script src="./jquery-weui/js/city-picker.min.js"></script>
 <script type="text/javascript" th:inline="javascript">
     var wechat_ready = false;
     function onBridgeReady(){
