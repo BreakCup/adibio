@@ -47,10 +47,6 @@
 	       
 	</footer>
 
-
-</body>
-
-
 <script type = "text/javascript" src = "http://code.jquery.com/jquery-3.2.1.min.js"></script> 
 	<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
 	<script type="text/javascript" src="./jquery-weui/js/jquery-weui.min.js" ></script>
@@ -75,12 +71,8 @@
 
 	//点击购买
 	$("#buy").click(function(e){
-        var r=confirm("确定购买该服务吗？");
-        if (r===true) {
-            window.location.href ="./pay_detail.html";
-        }else{
-
-        }
+        window.location.href ="./pay_detail.html";
+       
 
 			/*var dialog = new auiDialog({});
 			dialog.alert({
@@ -101,6 +93,11 @@
 		console.log("add");
 	});
 	</script>
+
+</body>
+
+
+
 
 </html>
 

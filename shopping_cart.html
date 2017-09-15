@@ -5,13 +5,13 @@
 
     <meta name="viewport"
           content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/> 
-    <link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
+   <link rel="stylesheet" type="text/css" href="./AUI/css/aui.css" />
 
     <link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
     <link rel="stylesheet" href="./jquery-weui/css/jquery-weui.css">
 
-    <script type = "text/javascript" src = "./jquery-3.2.1/jquery-3.2.1.min.js"></script> 
+    
    <!-- <link data-th-href="@{/jquery-weui/css/jquery-weui.min.css}" rel="stylesheet"> -->
 
 
@@ -25,7 +25,16 @@
 <section class="" style="margin-bottom:50px; " id=border>
 
 <div class="weui-cells weui-cells_checkbox"  id="content">
+<
 
+</div>
+
+
+
+
+
+</section>
+<section>
 	<div id="pop_select" class="weui-popup__container popup-bottom" style="z-index: 999; ">
 		<div class="weui-popup__overlay"></div>
 		<div class="weui-popup__modal">
@@ -38,10 +47,12 @@
 			<div class="modal-content">
 				<div class="weui-cells">
 					<div class="weui-cell">
+						<!--
 						<a class="weui-cell__bd" href="#">
 							检测人1
 						</a>
 						<a class="weui-cell__ft">添加</a>
+						-->
 					</div>
 				</div>
 			</div>
@@ -51,77 +62,115 @@
 	<div id="pop_write" class="weui-popup__container " style="z-index: 999; ">
 		<div class="weui-popup__overlay"></div>
 		<div class="weui-popup__modal">
-			<h1>信息填写</h1>
+			<section >
+				<form id="payinfo_form" name="inform" onchange="changed()" oninput="changed()">
+				<h1>测试页面未写数据发送</h1>
+					<div class="aui-content aui-margin-b-15">
+						<ul class="aui-list aui-from-list">
+							<li class="aui-list-header">填写信息（必填）</li>
+							<li class="aui-list-item">
+								<div class="aui-list-item-inner">
+									<div class="aui-list-item-label">*姓名:</div>
+									<div class="aui-list-item-input">
+										<input type="text" placeholder="姓名" name="name">
+									</div>
+								</div>
+							</li>
+							<li class="aui-list-item">
+								<div class="aui-list-item-inner">
+									<div class="aui-list-item-label">*性别:</div>
+									<div class="aui-list-item-input">
+										<label><input class="aui-radio" type="radio" name="gender" value="M"
+											checked="true">男</label>
+										<label><input class="aui-radio" type="radio" name="gender" value="F">女</label>
+
+										</div>
+									</div>
+								</li>
+								<li class="aui-list-item">
+									<div class="aui-list-item-inner">
+										<div class="aui-list-item-label">*年龄:</div>
+										<div class="aui-list-item-input">
+											<input type="number" placeholder="年龄" name="age">
+										</div>
+									</div>
+								</li>
+								<li class="aui-list-item">
+									<div class="aui-list-item-inner">
+										<div class="aui-list-item-label">*邮寄地址:</div>
+										<div class="aui-list-item-input">
+											<input type="text" name="province" class="weui-input" value="" id="city-picker">
+										</div>
+									</div>
+								</li>
+								<li class="aui-list-item">
+									<div class="aui-list-item-inner">
+										<div class="aui-list-item-label"></div>
+										<div class="aui-list-item-input">
+											<input type="text" placeholder="详细地址" name="address">
+										</div>
+									</div>
+								</li>
+								<li class="aui-list-item">
+									<div class="aui-list-item-inner">
+										<div class="aui-list-item-label">*联系电话:</div>
+										<div class="aui-list-item-input">
+											<input type="number" placeholder="电话" name="phone">
+										</div>
+									</div>
+								</li>
+
+								<li class="aui-list-item" style="display: none">
+									<div class="aui-list-item-inner">
+										<div class="aui-list-item-label">*是否怀孕:</div>
+										<div class="aui-list-item-input">
+											<label><input class="aui-radio" type="radio" name="is_pregnant" value="1">是</label>
+											<label><input class="aui-radio" type="radio" name="is_pregnant" value="0"
+												checked="true">否</label>
+										</div>
+									</div>
+								</li>
+								<li class="aui-list-item">
+									<div class="" style="display: flex;flex-direction: row;">
+										<div class="">*是否有糖尿病史:</div>
+										<div class="" style="">
+											<label><input class="aui-radio" type="radio" name="has_diabetic" value="1">是</label>
+											<label><input class="aui-radio" type="radio" name="has_diabetic" value="0"
+												checked="true">否</label>
+
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					<div class="aui-content aui-margin-b-15">
+						<ul class="aui-list aui-from-list">
+							<li class="aui-list-header">其他信息（选题）</li>
+							<li class="aui-list-item">
+								<div class="aui-list-item-inner">
+									<div class="aui-list-item-label">身高:</div>
+									<div class="aui-list-item-input">
+										<input type="number" placeholder="身高（cm）" name="height">
+									</div>
+								</div>
+							</li>
+							<li class="aui-list-item">
+								<div class="aui-list-item-inner">
+									<div class="aui-list-item-label">体重:</div>
+									<div class="aui-list-item-input">
+										<input type="number" placeholder="体重（kg）" name="weight">
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!--/*@thymesVar id="product" type="com.willshuhua.entity.Product"*/-->
+					<input type="hidden" th:value="${product.product_id}" name="product_id">
+				</form>
+				<div class="weui-btn weui-btn_primary close-popup">确认</div>
+			</section>
 		</div>
 	</div>
-<!--
-	<div class="weui-panel weui-panel_access">
-
-		<div class="weui-panel__bd">
-			<div class="weui-cell">
-				<label class="weui-cell__hd weui-check__label">
-					<input type="checkbox" class="weui-check" name="checkbox" checked="checked">
-					<i class="weui-icon-checked"></i>
-				</label> 
-				<div class="weui-cell__bd">
-					<div class="weui-media-box weui-media-box_appmsg">
-						<div class="weui-media-box__hd">
-							<img class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505831449&di=bdfe5ce42a5f422a8cc4926dbd8d73a7&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.jsqq.net%2Fuploads%2Fallimg%2F140323%2F1_140323064336_4.jpg">
-						</div>
-						<div class="weui-media-box__bd">
-							<h4 class="weui-media-box__title" style="width:91px;word-wrap:break-word; word-break:normal;font-size: 13px;">糖尿病早期筛查</h4>
-							<div class="weui-media-box__desc">
-								<p >金额:￥50</p>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="weui-cell__ft">
-					<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:72px">
-						<div class="aui-bar-btn-item" name="decrement">
-							<i class="aui-iconfont aui-icon-minus"></i>
-						</div>
-						<div class="aui-bar-btn-item">
-							<input type="number" disabled="true" class="aui-input aui-text-center" value="1" >
-						</div>
-						<div class="aui-bar-btn-item" name="increment">
-							<i class="aui-iconfont aui-icon-plus"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="weui-panel__ft">
-			<a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link" name="showPeople">
-				<div class="weui-cell__hd"></div>
-				<div class="weui-cell__bd">检测人</div>
-				<span class="weui-cell__ft"></span>
-			</a>
-			<ul class="people-ist" name="people_list" style="display: none">
-				<li class="weui-cell weui-cell_link">
-					<div class="weui-cell__hd"></div>
-					<div class="weui-cell__bd" name="">李狗蛋</div>
-					<div class="weui-cell__ft">
-						<i class="weui-icon-cancel" name="delete"></i>
-					</div>
-				</li>
-				<li>
-					<div style="display:flex; justify-content:center; margin: 10px auto;">
-					<div class="weui-btn weui-btn_mini weui-btn_primary" name="add">添加检测人</div>
-					</div>
-
-				</li>
-			</ul>
-		</div>
-	</div>
--->
-</div>
-
-
-
-
-
 </section>
 
 <footer class="aui-bar aui-bar-tab"> 
@@ -130,21 +179,16 @@
 	
 </footer>
 
-
-</body>
-
-
 <!--
-<script type="text/javascript" src="./AUI/script/aui-dialog.js" ></script>
 
-<script data-th-src="@{/AUI/script/aui-dialog.js}" ></script>
 <script data-th-src="@{/jquery-weui/js/jquery-weui.min.js}"></script>
 -->
+<script type = "text/javascript" src = "./jquery-3.2.1/jquery-3.2.1.min.js"></script> 
 
-<script type="text/javascript" src="./jquery-weui/js/jquery-weui.min.js" ></script>
+<script type="text/javascript" src="./jquery-weui/js/jquery-weui.min.js"></script>
 
 <script type="text/javascript">
-	 var context = /*[[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]]*/;
+	 var context/* = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]]*/;
 
 	var cartData={};
 
@@ -152,27 +196,32 @@
 
 	$(document).ready(
 		GetCartData(),
-		Draw()
+		DrawCart()
+		
 	);
 
+	
+
+	//获取购物车信息
 	function GetCartData(){
 
 
 		var path = context +  '/show_cart_info';
 
 				//获取购物车信息
-				/*var cartDataXml = $.ajax({
+				/*$.ajax({
 		            cache: true,
 		            type: "GET",
 		            url: path,
-		            data: "get shopping car info",// 
+		           
 		            dataType:json,
 		            async: false,
 		            error: function (request) {
-		                
+		                //错误
 		            },
 		            success: function (data) {
-		                cartData = data
+						cartData = data
+		                
 		            }
 		        });*/
 		        cartData = {
@@ -189,7 +238,7 @@
 		        		"product_id":"32132146-4564-56465",
 		        		"product_name":"糖尿病早期筛查",
 		        		"unit_price":0.01,
-		        		"quantity":3
+		        		"quantity":2
 
 		        	},
 		        	{
@@ -198,7 +247,7 @@
 		        		"product_id":"32132146-4564-56465",
 		        		"product_name":"肾病早期筛查",
 		        		"unit_price":0.01,
-		        		"quantity":3
+		        		"quantity":2
 
 		        	}
 		        	]
@@ -206,23 +255,24 @@
 		        };
 		    }
 
-		    function Draw(){
+		    function DrawCart(){
 
-		    	var html;
+		    	var html = '';
 
 
 		    	if (cartData.result=="ok") {
 
-		    		for (var i = cartData.parm.length - 1; i >= 0; i--) {
+		    		for (var i = 0; i < cartData.parm.length ; i++) {
 		    			unit_price[cartData.parm[i].product_name] = cartData.parm[i].unit_price;
 
-		    			html  = '<div class="weui-panel weui-panel_access">'
+		    			html += '<div class="weui-panel weui-panel_access">'
 
 		    			html += '<div class="weui-panel__bd">'
 		    			html += '<div class="weui-cell">'
 		    			html += '<label class="weui-cell__hd weui-check__label">'
 		    			html += '<input type="checkbox" class="weui-check" name="checkbox" checked="checked">'
 		    			html += '<i class="weui-icon-checked"></i>'
+		    			html += '<input type="hidden" name="cart_info">'
 		    			html += '</label> '
 		    			html += '<div class="weui-cell__bd">'
 		    			html += '<div class="weui-media-box weui-media-box_appmsg">'
@@ -239,7 +289,7 @@
 
 		    			html += '</div>'
 		    			html += '</div>'
-		    			html += '<div class="weui-cell__ft">'
+		    			html += '<div class="weui-cell__ft" style="display:none">'
 		    			html += '<div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:72px">'
 		    			html += 	'<div class="aui-bar-btn-item" name="decrement">'
 		    			html += 	'<i class="aui-iconfont aui-icon-minus"></i>'
@@ -258,39 +308,78 @@
 		    			html += '<a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link" name="showPeople">'
 		    			html += '<div class="weui-cell__hd"></div>'
 		    			html += '<div class="weui-cell__bd">检测人</div>'
-		    			html += 				'<span class="weui-cell__ft"></span>'
-		    			html += 			'</a>'
-		    			html += 		'<ul class="people-ist" name="people_list" style="display: none">'			
-		    			html += 	'<li>'
-		    			html += '<div style="display:flex; justify-content:center; margin: 10px auto;">'
-		    			html += 	'<div class="weui-btn weui-btn_mini weui-btn_primary" name="add">添加检测人</div>'
-		    			html += 	'</div>'
-
-		    			html += '</li>'
+		    			html += '<span class="weui-cell__ft"></span>'
+		    			html += '</a>'
+		    			html += '<div class="people-ist" name=people_list style="display: none">'
+		    			html += '<ul name="cart_patient_list">'
 		    			html += '</ul>'
+		    			html += '<div style="display:flex; justify-content:center; margin: 10px auto;">'
+		    			html += '<div class="weui-btn weui-btn_mini weui-btn_primary" name="add">添加检测人</div>'
+		    			html += '</div>'
+		    			html += '</div>'
 		    			html += '</div>'
 		    			html += '</div>'
 
 
-		    			$('#content').append(html);
+		    			
 
 
 		    		}
+		    		$('#content').html(html);
+		    		BindCartInfo();
+
 
 		    	}else{
 		    		alert('获取购物车信息失败');
 		    	}
 
 		    }
+	//画出购物车对应的检测人
+	function DrawCartPatient(obj){
+		var cartInfo = obj.parent().prev().find("input:hidden").data();
+		var req = {};
+		var html='';
+
+		req.cart_id = cartInfo.cart_id;
+		req.cart_itemid = cartInfo.cart_itemid;
+		req.product_id = cartInfo.product_id;
+		req.quantity = cartInfo.quantity;
+		
+		var cartPatient = GetCartPatient(req);
+		if (cartPatient.result=="ok") {
+			//draw
+			for (var i = 0; i < cartPatient.parm.length; i++) {
+				html += '<li class="weui-cell weui-cell_link">';
+				html += '<input type="hidden" name="cart_patient_info">';
+				html += '<div class="weui-cell__bd" name="patient_name">'+cartPatient.parm[i].name+'</div>';
+				html += '<div class="weui-cell__ft" >';
+				html += '<i class="weui-icon-cancel" name="delete_patient"></i>';
+				html += '</div>';
+				html += '</li>';
+				
+			}
+			$("ul[name=cart_patient_list]").html(html);
+			BindCartPatient(obj.next(),cartPatient);
+			
+			//点击刪除检测人
+			$('i[name=delete_patient]').click(function(e){
+				console.log('fuck');
+				e.stopPropagation();
+			});
+			
+			
+		}
+	}
+
 	//查询购物车项目对应的患者信息
-	function GetPeopleofCartInfo(req){
+	function GetCartPatient(req){
 		var patientInfo;
 		var path = context + "";
-		/*var patientInfoXml = $.ajax({
+		/*$.ajax({
 		            cache: true,
-		            type: "GET",
+		            type: "POST",
 		            url: path,
-		            data: "get shopping car info",// 
+		            data:req,
 		            dataType:json,
 		            async: false,
 		            error: function (request) {
@@ -300,14 +389,90 @@
 		                patientInfo = data
 		            }
 		        });*/
-		if (patientInfoXml.response == '200') {
+		patientInfo = {
+			                "result": "ok",
+			                "errMsg": "",
+			                "parm": [
+			                    {
+			                        "is_pregnant": 0,
+			                        "has_diabetic": 0,
+			                        "country": "CHINA",
+			                        "address": "你好",
+			                        "gender": "M",
+			                        "city": "北京市",
+			                        "weight": 0,
+			                        "cart_patient_infoid": "899fa698-62c6-40ed-bf92-be97fd60ff99",
+			                        "province": "北京",
+			                        "phone": "13000000000",
+			                        "product_id": "bda342a2-27c0-4cb1-bed3-11a786391365",
+			                        "district": "东城区",
+			                        "cart_itemid": "68e5c479-43cc-4cd4-b67a-2094481e8e6d",
+			                        "name": "李四",
+			                        "patient_infoid": "9e62c589-cc2e-485c-bae0-a52e9fcfebeb",
+			                        "age": 20,
+			                        "height": 0
+			                    },
+			                    {
+			                        "is_pregnant": 0,
+			                        "has_diabetic": 0,
+			                        "country": "CHINA",
+			                        "address": "深圳大学",
+			                        "gender": "M",
+			                        "city": "深圳市",
+			                        "weight": 0,
+			                        "cart_patient_infoid": "a242f238-ee15-414a-9856-28b4acb25e24",
+			                        "province": "广东省",
+			                        "phone": "13000000000",
+			                        "product_id": "bda342a2-27c0-4cb1-bed3-11a786391365/",
+			                        "district": "南山区",
+			                        "cart_itemid": "68e5c479-43cc-4cd4-b67a-2094481e8e6d",
+			                        "name": "张三",
+			                        "patient_infoid": "dfdb7bd8-efea-4c0a-8877-3a41a8e93529",
+			                        "age": 20,
+			                        "height": 0
+			                    }
+			                ]
+			            };
+		return patientInfo;
 
-		}else{
-			return patientInfo;
-		}
+	}
+	//绑定购物车检测人信息
+	function BindCartPatient(obj,patientInfo){
+		obj.find('input:hidden').each(function(index,el){
+			$(this).data(patientInfo.parm[index]);
+			
+		});
 
 	}
 
+	//获取customer拥有的患者信息
+	function GetPatientInfo(){
+		var patientInfo;
+		var path = context + '/patient_infos';
+		/*$.ajax({
+		            cache: true,
+		            type: "GET",
+		            url: path,
+		           
+		            dataType:json,
+		            async: false,
+		            error: function (request) {
+		                
+		            },
+		            success: function (data) {
+		                patientInfo = data
+		            }
+		        });*/
+		
+	}
+	//购物车数据绑定
+	function BindCartInfo(){
+		$("input[name=cart_info]").each(function(index){
+			$(this).data(cartData.parm[index]);
+			
+		});
+	
+	}
 
 	//减少数量
 	$('div[name=decrement]').click(function Decrement(e){
@@ -342,6 +507,25 @@
 		}
 	})
 
+	//发送增加数量
+	function AddCartPatient(req){
+		/*$.ajax({
+		            cache: true,
+		            type: "POST",
+		            url: path,
+		           	data:req;
+		            dataType:json,
+		            async: false,
+		            error: function (request) {
+		                
+		            },
+		            success: function (data) {
+		                
+		            }
+		        });*/
+	}
+
+
 	//增加数量
 	$('div[name=increment]').click(function Increment(e){
 		var priceNode =  $(this).parent().parent().prev().find("p");
@@ -350,9 +534,7 @@
 			var unit_price = GetUnitPrice($(this).parent().parent().prev().find("h4").text());
 			countNode.val(parseInt(countNode.val())+1);
 
-			/*$.ajax({
-
-			});*/
+			
 
 			priceNode.text("金额：￥"+(unit_price*countNode.val()));
 		}
@@ -362,8 +544,7 @@
 	//弹出检测人框
 	$('a[name=showPeople]').click(function(e){
 		$(this).next().slideDown();
-		//获取购物车检测人名单/已保存的检测人
-
+		DrawCartPatient($(this));	//画出检测人框
 
 		e.stopPropagation();
 	});
@@ -371,7 +552,7 @@
 	
 	//收回检测人框
 	$(document).click(function(e){
-		$('ul[name=people_list]').slideUp();
+		$('div[name=people_list]').slideUp();
 	});
 	
 	//添加检测人
@@ -382,15 +563,37 @@
 			$("#pop_select").popup();
 		}else{
 			//弹出全屏的信息填写框
+
 			$("#pop_write").popup();
 		}
 		e.stopPropagation();
 	})
 
-	//删除检测人
-	$("i[name=delete]").click(function(e){
-		e.stopPropagation();
-	});
+
+	
+	//发送删除患者信息
+	/*function DeleteCartPatientInfo(cartPatient){
+		var path = context + "/reduce_cart_item";
+		var request = {};
+		request.care_patient_infoid = cartPatient.care_patient_infoid;
+		$.ajax({
+            cache: true,
+            type: "POST",
+            url: path,
+            data: request,
+            async: false,
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                
+            }
+        });
+	}*/
+
+
+
+	
 
 	//阻止添加检测人框触发的冒泡事件
 	/*$("#pop").click(function(e){
@@ -406,6 +609,7 @@
 
 	//购买
 	function Buy(){
+		console.log("buy");
 		
 		/*$.ajax({
             cache: true,
@@ -422,7 +626,6 @@
         });*/
     }
 </script>
-
 <style type="text/css">
 	.people-list{
 		margin-left: 10px;
@@ -480,13 +683,12 @@
 		
 
 	}
-	.my-btn{
-
-		font-size: 15px;
-	}
-	.num-input{
-
-	}
 </style>
+</body>
+
+
+
+
+
 
 </html>

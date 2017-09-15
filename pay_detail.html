@@ -152,14 +152,6 @@
             <input class="aui-checkbox" type="radio" name="isagree" onclick="agreeClick(this)">
             <p>阅读并同意该协议<a href="#">《协议》</a></p>
         </div>
-        <!--
-        <label for="adibioAgree" class="weui-agree">
-          <input id="adibioAgree" type="checkbox" class="weui-agree__checkbox" name="isagree" onclick="agreeClick(this)">
-          <span class="weui-agree__text">
-            阅读并同意<a href="#">《相关条款》</a>
-          </span>
-        </label>
-        -->
         
     </form>
 </section>
@@ -172,7 +164,6 @@
     </div>
 </footer>
 
-</body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!--
 <script type="text/javascript" data-th-src="@{/AUI/script/aui-dialog.js}"></script>
@@ -264,11 +255,11 @@
 
     //启用/禁用蒙版
     function Mask(action){
-    	if(action == 'hide'){
-    		document.getElementById('mask').style.display="block";
-    	}else{
-    		document.getElementById('mask').style.display="none";
-    	}
+        if(action == 'hide'){
+            document.getElementById('mask').style.display="block";
+        }else{
+            document.getElementById('mask').style.display="none";
+        }
     }
 
     //启用、禁用按钮
@@ -314,13 +305,13 @@
         console.log(data);
         //判断电话是否为手机
         if (!phone.test(data.phone)) {
-        	Mask('hide');
+            Mask('hide');
             dialog.alert({
                 title: "提示",
                 msg: '请填写正确的电话号码',
                 buttons: ['确定']
             },function(re){
-            	Mask('unhide');
+                Mask('unhide');
             });
         } else {
             show_confirm();
@@ -350,6 +341,9 @@
         }
     }
 </script>
+
+</body>
+
 </html>
 
 
