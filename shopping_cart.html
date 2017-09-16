@@ -205,16 +205,16 @@
 									</div>
 								</li>
 								<li class="aui-list-item">
-									<div class="" style="display: flex;flex-direction: row;">
-										<div class="">*是否有糖尿病史:</div>
-										<div class="" style="">
-											<label><input class="aui-radio" type="radio" name="has_diabetic" value="1">是</label>
-											<label><input class="aui-radio" type="radio" name="has_diabetic" value="0"
-												checked="true">否</label>
+				                    <div class="aui-list-item-inner" style="display: flex;flex-direction: row;justify-content: left;">
+				                        <div class="">*是否有糖尿病史:</div>
+				                        <div class="" style="margin-left: 1em;">
+				                            <label><input class="aui-radio" type="radio" name="has_diabetic" value="1">是</label>
+				                            <label><input class="aui-radio" type="radio" name="has_diabetic" value="0"
+				                                          checked="true">否</label>
 
-										</div>
-									</div>
-								</li>
+				                        </div>
+				                    </div>
+				                </li>
 							</ul>
 						</div>
 					<div class="aui-content aui-margin-b-15">
@@ -241,7 +241,11 @@
 					<!--/*@thymesVar id="product" type="com.willshuhua.entity.Product"*/-->
 					<input type="hidden" th:value="${product.product_id}" name="product_id">
 				</form>
-				<div class="weui-btn weui-btn_primary close-popup">确认</div>
+				<div class="block">
+					<div class="Mask" id="mask"></div>
+					<div class="weui-btn weui-btn_primary" id='patientInfoConfirm'>确认</div>
+				</div>
+				
 			</section>
 		</div>
 	</div>
@@ -257,9 +261,13 @@
 
 <script data-th-src="@{/jquery-weui/js/jquery-weui.min.js}"></script>
 -->
+
+
 <script type = "text/javascript" src = "./jquery-3.2.1/jquery-3.2.1.min.js"></script> 
 
 <script type="text/javascript" src="./jquery-weui/js/jquery-weui.min.js"></script>
+
+<script src="./jquery-weui/js/city-picker.min.js"></script>
 
 <script type="text/javascript">
 	 var context/* = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]]*/;
@@ -401,10 +409,10 @@
     		for (var i = 0; i < cartData.parm.length ; i++) {
     			unit_price[cartData.parm[i].product_name] = cartData.parm[i].unit_price;
 
-    			$('#cartItem').find('span[name=productName]').html(cartData.parm[i].product_name);
-    			$('#cartItem').find('span[name=money]').html(cartData.parm[i].unit_price*cartData.parm[i].quantity);
+    			$('#cartItem').find('span[name=productName]').text(cartData.parm[i].product_name);
+    			$('#cartItem').find('span[name=money]').text(cartData.parm[i].unit_price*cartData.parm[i].quantity);
     			cartTemplet = $('#cartItem').clone();
-    			//html += cartTemplet;
+    			
     			$('#content').append(cartTemplet);
 
     		}
@@ -435,7 +443,7 @@
 		if (cartPatient.result=="ok") {
 			//draw
 			for (var i = 0; i < cartPatient.parm.length; i++) {
-				$('#cartPatientItem').find('span[name=patientName]').html(cartPatient.parm[i].name);
+				$('#cartPatientItem').find('span[name=patientName]').text(cartPatient.parm[i].name);
 		    	$("ul[name=cart_patient_list]").append($('#cartPatientItem').clone());
 		    	
 			}
@@ -615,7 +623,7 @@ function init(){
 
 		//获取当前购物车项目信息
 		var cartItem = $(this).parents('div.weui-panel').find('input[name=cart_info]').data();
-		if(patientInfo.result=='ok' && patientInfo.parm.length>0){
+		if(patientInfo.result=='error' && patientInfo.parm.length>0){
 			//弹出检测人选择框
 			DrawSelectPatient($('#selectPatientList'),patientInfo);
 			$("#pop_select").popup();
@@ -625,7 +633,7 @@ function init(){
 				alert('获取信息错误！');
 		}else{
 			//弹出全屏的信息填写框
-
+			PatientInfoConfirm(cartItem);
 			$("#pop_write").popup();
 		}
 		e.stopPropagation();
@@ -637,7 +645,7 @@ function init(){
 		var selectPatientTemplet;
 		obj.empty();
 		for(var i=0;i<patientData.parm.length;i++){
-			$("#customerPatientItem").find('span[name=patientName]').html(patientData.parm[i].name);
+			$("#customerPatientItem").find('span[name=patientName]').text(patientData.parm[i].name);
 			selectPatientTemplet = $("#customerPatientItem").clone();
 			obj.append(selectPatientTemplet);
 		}
@@ -737,23 +745,120 @@ function init(){
     }
 
 	//购买
+
 	function Buy(){
-		console.log("buy");
+		var path  = context + '/buy_cart_selects';
+		var reqBuy = [];
+		$('input[name="checkbox"]:checked').each(function(index){ 
+			//console.log(index,$(this).nextAll('input:hidden').data());
+			/*var itemInfo = $(this).nextAll('input:hidden').data();
+			temp.cart_id = itemInfo.cart_id;
+			temp.cart_itemid = itemInfo.cart_itemid;
+			temp.product_id = itemInfo.product_id;
+			temp.quantity = itemInfo.quantity;
+			console.log(itemInfo);*/
+			reqBuy.push($(this).nextAll('input:hidden').data());
+			delete reqBuy.product_name;
+			delete reqBuy.unit_price;
+		}); 
+		reqBuy.pop();
 		
-		/*$.ajax({
+		if (reqBuy!='') {
+			/*$.ajax({
             cache: true,
             type: "POST",
-            url: ,
-            data: ,
+            url: path,
+            data: reqBuy,
             async: false,
-            error: function (request) {
-                alert("Connection error");
+            error: function (request) { 
+                alert("购买失败");
             },
             success: function (data) {
-                
+                if(data.result=='ok'){
+					//支付
+                }
             }
         });*/
+		}
+		
     }
+
+	//弹出的检测人信息填写页面代码
+
+	 //呼出省市选择器
+    $("#city-picker").cityPicker({
+        showDistrict: true
+    });
+
+    //启用/禁用蒙版
+    function Mask(action){
+        if(action == 'hide'){
+            document.getElementById('mask').style.display="block";
+        }else{
+            document.getElementById('mask').style.display="none";
+        }
+    }
+
+	//启用、禁用按钮
+    function changed() {
+        //阻止input-age内输入e
+        $('input[name=age]').val($('input[name=age]').val().replace(/^[e.]$/, ''));
+        $('input[name=phone]').val($('input[name=phone]').val().replace(/^[e.]$/, ''));
+        //遍历form的元素值
+        var arr = $('form').serializeArray();
+        var data = {};
+        //变成json格式
+        for (var item in arr) {
+            data[arr[item].name] = arr[item].value;
+        }
+        if (data.name == '' || data.name == ' ' || data.age == '' || data.age == ' ' || data.province == "" || data.address == '' || data.address == ' ' || data.phone == '' || data.phone == ' ') {
+            Mask('hide');
+        } else {
+            
+            Mask('unhide');
+            
+        }
+    }
+
+    function PatientInfoConfirm(cartItem){
+    	$('#patientInfoConfirm').click(function(e){
+    		//遍历form的元素值
+	       
+	        var arr = $('form').serializeArray();
+	        var phone = /^[1][3,5,8][0-9]{9}$/;
+	        var data = {};
+	        //变成json格式
+	        for (var item in arr) {
+	            data[arr[item].name] = arr[item].value;
+	        }
+	        //分割省市区
+	        var local = data.province.split(' ');
+	        data.province = local[0];
+	        data.city = local[1];
+	        data.district = local[2];
+
+	        //判断电话是否为手机
+	        if (!phone.test(data.phone)) {
+	            $.confirm({
+				title: '提示',
+				text: '电话格式错误！',
+				onOK: function () {
+			    //点击确认
+			    
+			},
+			onCancel: function () {
+			  	//点击取消
+
+			  }
+			});
+	            
+	        } else {
+	        	//发送增加购物车数量
+	        	console.log(data);
+	        }
+    	})
+    }
+    
 </script>
 <style type="text/css">
 	.templet{
@@ -816,6 +921,24 @@ function init(){
 		
 
 	}
+
+	 .black {
+        position: relative;
+    }
+
+    .Mask {
+        z-index: 2;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #eee;
+        opacity: 0.5
+    }
+
+    .beMask {
+        z-index: 1;
+        position: absolute;
+    }
 </style>
 </body>
 

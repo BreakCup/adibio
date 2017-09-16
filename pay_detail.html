@@ -113,9 +113,9 @@
                     </div>
                 </li>
                 <li class="aui-list-item">
-                    <div class="" style="display: flex;flex-direction: row;">
+                    <div class="aui-list-item-inner" style="display: flex;flex-direction: row;justify-content: left;">
                         <div class="">*是否有糖尿病史:</div>
-                        <div class="" style="">
+                        <div class="" style="margin-left: 1em;">
                             <label><input class="aui-radio" type="radio" name="has_diabetic" value="1">是</label>
                             <label><input class="aui-radio" type="radio" name="has_diabetic" value="0"
                                           checked="true">否</label>
@@ -292,7 +292,7 @@
 
     //点击支付按钮
     $('#pay').click(function (e) {
-        console.log("click pay");
+        
         //遍历form的元素值
         var dialog = new auiDialog({});
         var arr = $('form').serializeArray();
