@@ -205,6 +205,12 @@
         data.province = local[0];
         data.city = local[1];
         data.district = local[2];
+        if (data.height=='') {
+            data.height=0;
+        }
+        if (data.weight=='') {
+            data.weight=0;
+        }
 
         $.ajax({
             cache: true,

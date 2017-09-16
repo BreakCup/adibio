@@ -85,7 +85,7 @@
 				<ul name="cart_patient_list">
 				</ul>
 				<div style="display:flex; justify-content:center; margin: 10px auto;">
-					<div class="weui-btn weui-btn_mini weui-btn_primary" name="add">添加检测人</div>
+					<div class="weui-btn weui-btn_mini weui-btn_primary" name="add" id='addPatient'>添加检测人</div>
 				</div>
 			</div>
 		</div>
@@ -115,7 +115,7 @@
 </section>
 
 <section>
-	<div id="pop_select" class="weui-popup__container popup-bottom" style="z-index: 999; ">
+	<div id="pop_select" class="weui-popup__container popup-bottom weui-popup-overlay" style="z-index: 999; ">
 		<div class="weui-popup__overlay"></div>
 		<div class="weui-popup__modal">
 			<div class="toolbar">
@@ -128,17 +128,17 @@
 				<div class="weui-cells" id="selectPatientList">
 					<!--拥有的检测人信息-->
 				</div>
-				<div class="weui-btn weui-btn_mini weui-btn_primary close-popup" style="display:flex; justify-content:center;width: 40%; margin: 0.4em auto;">添加新的检测人</div>
+				<div class="weui-btn weui-btn_mini weui-btn_primary close-popup" style="display:flex; justify-content:center;width: 40%; margin: 0.4em auto;" id='addNewPatient' name='add'>添加新的检测人</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="pop_write" class="weui-popup__container " style="z-index: 999; ">
+	<div id="pop_write" class="weui-popup__container weui-popup-overlay" style="z-index: 999; ">
 		<div class="weui-popup__overlay"></div>
 		<div class="weui-popup__modal">
 			<section >
 				<form id="payinfo_form" name="inform" onchange="changed()" oninput="changed()">
-				<h1>测试页面未写数据发送</h1>
+				
 					<div class="aui-content aui-margin-b-15">
 						<ul class="aui-list aui-from-list">
 							<li class="aui-list-header">填写信息（必填）</li>
@@ -616,26 +616,33 @@ function init(){
 		$('div[name=people_list]').slideUp();
 	});
 	
-	//点击添加检测人
+	//点击添加已有检测人或者添加新的检测人
 	$("div[name=add]").click(function(e){
-		//弹出已保存的人名单，无保存的填写信息
-		var patientInfo = GetPatientInfo();
 
-		//获取当前购物车项目信息
-		var cartItem = $(this).parents('div.weui-panel').find('input[name=cart_info]').data();
-		if(patientInfo.result=='error' && patientInfo.parm.length>0){
-			//弹出检测人选择框
-			DrawSelectPatient($('#selectPatientList'),patientInfo);
-			$("#pop_select").popup();
-			SelectAdd(cartItem);
+		if ($(this).attr('id')=="addPatient") {
+			//弹出已保存的人名单，无保存的填写信息
+			var patientInfo = GetPatientInfo();
 
-		}else if(patientInfo.result=="error"){
-				alert('获取信息错误！');
+			//获取当前购物车项目信息
+			var cartItem = $(this).parents('div.weui-panel').find('input[name=cart_info]').data();
+			if(patientInfo.result=='ok'){
+				//弹出检测人选择框
+				DrawSelectPatient($('#selectPatientList'),patientInfo);
+				$("#pop_select").popup();
+				SelectAdd(cartItem);
+				
+
+			}else{
+					alert('获取信息错误！');
+			}
+
 		}else{
+
 			//弹出全屏的信息填写框
-			PatientInfoConfirm(cartItem);
+			PatientInfoConfirm();
 			$("#pop_write").popup();
 		}
+		
 		e.stopPropagation();
 	});
 }
@@ -695,7 +702,7 @@ function init(){
         });*/
 	}
 
-	//select列表点击添加
+	//select列表点击添加检测人
 	function SelectAdd(cartItem){
 		var req = {};
 		req.cartItem = {};
@@ -711,11 +718,11 @@ function init(){
 
 		})
 	}
-
+	
 	//发送增加数量
 	function AddCartPatient(req){
 		var path = context + '/add_cart';
-		console.log(req);
+		
 		/*$.ajax({
 		            cache: true,
 		            type: "POST",
@@ -750,13 +757,7 @@ function init(){
 		var path  = context + '/buy_cart_selects';
 		var reqBuy = [];
 		$('input[name="checkbox"]:checked').each(function(index){ 
-			//console.log(index,$(this).nextAll('input:hidden').data());
-			/*var itemInfo = $(this).nextAll('input:hidden').data();
-			temp.cart_id = itemInfo.cart_id;
-			temp.cart_itemid = itemInfo.cart_itemid;
-			temp.product_id = itemInfo.product_id;
-			temp.quantity = itemInfo.quantity;
-			console.log(itemInfo);*/
+			
 			reqBuy.push($(this).nextAll('input:hidden').data());
 			delete reqBuy.product_name;
 			delete reqBuy.unit_price;
@@ -765,20 +766,20 @@ function init(){
 		
 		if (reqBuy!='') {
 			/*$.ajax({
-            cache: true,
-            type: "POST",
-            url: path,
-            data: reqBuy,
-            async: false,
-            error: function (request) { 
-                alert("购买失败");
-            },
-            success: function (data) {
-                if(data.result=='ok'){
-					//支付
-                }
-            }
-        });*/
+	            cache: true,
+	            type: "POST",
+	            url: path,
+	            data: reqBuy,
+	            async: false,
+	            error: function (request) { 
+	                alert("购买失败");
+	            },
+	            success: function (data) {
+	                if(data.result=='ok'){
+						//支付
+	                }
+	            }
+	        });*/
 		}
 		
     }
@@ -820,7 +821,7 @@ function init(){
         }
     }
 
-    function PatientInfoConfirm(cartItem){
+    function PatientInfoConfirm(){
     	$('#patientInfoConfirm').click(function(e){
     		//遍历form的元素值
 	       
@@ -836,6 +837,13 @@ function init(){
 	        data.province = local[0];
 	        data.city = local[1];
 	        data.district = local[2];
+
+	         if (data.height=='') {
+	            data.height=0;
+	        }
+	        if (data.weight=='') {
+	            data.weight=0;
+	        }
 
 	        //判断电话是否为手机
 	        if (!phone.test(data.phone)) {
@@ -853,8 +861,24 @@ function init(){
 			});
 	            
 	        } else {
-	        	//发送增加购物车数量
-	        	console.log(data);
+	        	//发送增加检测人
+	        	var path = context + '/add_patient_info';
+	        	/*$.ajax({
+		            cache: true,
+		            type: "POST",
+		            url: path,
+		            data: data,
+		            async: false,
+		            error: function (request) { 
+		                alert("购买失败");
+		            },
+		            success: function (data) {
+		                
+		            }
+		        });*/
+		        $.closePopup();
+	        	
+	        	
 	        }
     	})
     }
